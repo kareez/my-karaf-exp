@@ -74,6 +74,7 @@
                             *
                         </Import-Package>
                         <Private-Package>!*</Private-Package>
+                        <Bundle-Activator>my.sample.cmds.MyBundleActivator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
