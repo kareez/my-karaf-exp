@@ -1,4 +1,4 @@
-package my.sample.cmds;
+package my.sample.bpsc;
 
 import org.apache.karaf.shell.console.Completer;
 import org.apache.karaf.shell.console.completer.StringsCompleter;

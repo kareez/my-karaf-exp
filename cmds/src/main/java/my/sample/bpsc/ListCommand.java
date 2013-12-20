@@ -1,4 +1,4 @@
-package my.sample.cmds;
+package my.sample.bpsc;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
@@ -6,7 +6,7 @@ import org.apache.karaf.shell.console.OsgiCommandSupport;
 
 
 /**
- * Displays the last log entries
+ * @author mohammad shamsi <m.h.shams@gmail.com>
  */
 @Command(scope = "my", name = "list", description = "a sample command")
 public class ListCommand extends OsgiCommandSupport {

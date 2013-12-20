@@ -12,11 +12,11 @@
         <relativePath>../</relativePath>
     </parent>
 
-    <artifactId>cmds</artifactId>
+    <artifactId>bpsc</artifactId>
     <packaging>bundle</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>My Sample :: Commands</name>
+    <name>My Sample :: Client of Sample Blueprint Bundle</name>
     <description>Provides the OSGi custom (extended) commands</description>
 
     <dependencies>
@@ -38,6 +38,12 @@
             <artifactId>org.osgi.compendium</artifactId>
             <version>4.3.1</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>my.sample</groupId>
+            <artifactId>bps</artifactId>
+            <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -68,15 +74,12 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Export-Package>my.sample.cmds*;version=${project.version}</Export-Package>
-                        <Import-Package>!my.sample.cmds*,
+                        <Export-Package>my.sample.bpsc*;version=${project.version}</Export-Package>
+                        <Import-Package>!my.sample.bpsc*,
                             org.apache.felix.service.command,
-                            org.apache.felix.gogo.commands,
-                            org.apache.karaf.shell.console,
                             *
                         </Import-Package>
                         <Private-Package>!*</Private-Package>
-                        <Bundle-Activator>my.sample.bpsc.MyBundleActivator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
