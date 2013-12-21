@@ -1,5 +1,5 @@
 
-package my.sample.bpsc;
+package my.sample.cmds;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -8,9 +8,8 @@ import static junit.framework.Assert.assertEquals;
 import static junit.framework.Assert.assertTrue;
 
 /**
- * Test cases for {@link my.sample.bpsc.ListCommand}
+ * Test cases for {@link my.sample.cmds.ListCommand}
  */
-@SuppressWarnings("unchecked")
 public class ListCommandTest {
 
     private ListCommand command;

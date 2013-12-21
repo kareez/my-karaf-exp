@@ -15,8 +15,8 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
-    <name>My Sample :: Sample Blueprint Bundle</name>
-    <description>Creates a OSGi blueprint bundle project.</description>
+    <name>My Sample :: Provider </name>
+    <description>Creates a OSGi service (using blueprint).</description>
 
     <build>
         <plugins>

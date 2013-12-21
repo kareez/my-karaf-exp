@@ -1,4 +1,4 @@
-package my.sample.bpsc;
+package my.sample.cmds;
 
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleActivator;

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 
-    <bean id="sampleCompleter" class="my.sample.bpsc.ListCommandCompleter" />
+    <bean id="sampleCompleter" class="my.sample.cmds.ListCommandCompleter" />
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="my/list">
-            <action class="my.sample.bpsc.EchoCommand" />
+            <action class="my.sample.cmds.ListCommand" />
             <completers>
                 <ref component-id="sampleCompleter" />
             </completers>

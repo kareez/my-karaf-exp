@@ -1,4 +1,4 @@
-package my.sample.bpsc;
+package my.sample.cmds;
 
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
