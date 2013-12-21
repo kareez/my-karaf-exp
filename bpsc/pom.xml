@@ -16,7 +16,7 @@
     <packaging>bundle</packaging>
     <version>1.0-SNAPSHOT</version>
 
-    <name>My Sample :: Client </name>
+    <name>My Sample :: Client</name>
     <description>a client for blueprint service</description>
 
     <dependencies>
