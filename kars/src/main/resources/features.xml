@@ -6,5 +6,6 @@
         <bundle>mvn:my.sample/cmds/1.0-SNAPSHOT</bundle>
         <bundle>mvn:my.sample/bps/1.0-SNAPSHOT</bundle>
         <bundle>mvn:my.sample/bpsc/1.0-SNAPSHOT</bundle>
+        <bundle>mvn:my.sample/bpre/1.0-SNAPSHOT</bundle>
     </feature>
 </features>
