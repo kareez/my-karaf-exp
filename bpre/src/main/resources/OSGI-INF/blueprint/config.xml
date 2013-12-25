@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           xmlns:cxf="http://cxf.apache.org/blueprint/core"
+           xmlns:jaxrs="http://cxf.apache.org/blueprint/jaxrs" xmlns:jaxws="http://cxf.apache.org/blueprint/jaxws">
+
+    <cm:property-placeholder persistent-id="my.sample.bpre" update-strategy="reload" />
+
+    <cxf:bus id="itemServiceBus" />
+
+    <jaxrs:server address="/repo" id="itemService">
+        <jaxrs:serviceBeans>
+            <ref component-id="itemServiceBean"/>
+        </jaxrs:serviceBeans>
+    </jaxrs:server>
+
+    <jaxws:endpoint implementor="#itemServiceBean" address="/itemService"/>
+
+    <bean id="itemServiceBean" class="my.sample.bpre.impl.ItemServiceImpl"/>
+
+</blueprint>
+
