@@ -29,7 +29,7 @@ class ItemRepository {
         if (items.containsKey(id)) {
             return items.get(id);
         }
-        throw new IllegalArgumentException("Item not found. (item #" + id);
+        throw new IllegalArgumentException("Item not found. (item #" + id + ")");
     }
 
     Item update(Item item) {
@@ -37,12 +37,12 @@ class ItemRepository {
             items.put(item.getId(), item);
             return items.get(item.getId());
         }
-        throw new IllegalArgumentException("Item not found. (item #" + item.getId());
+        throw new IllegalArgumentException("Item not found. (item #" + item.getId() + ")");
     }
 
     Item add(Item item) {
         if (items.containsKey(item.getId())) {
-            throw new IllegalArgumentException("Duplicate item id. (item #" + item.getId());
+            throw new IllegalArgumentException("Duplicate item id. (item #" + item.getId() + ")");
         }
         items.put(item.getId(), item);
         return items.get(item.getId());
