@@ -7,9 +7,9 @@ import java.util.List;
  */
 
 public interface ItemService {
-    List<Item> find();
+    List<Item> findAll();
 
-    Item findAll(String id);
+    Item find(String id);
 
     Item update(String id, Item item);
 

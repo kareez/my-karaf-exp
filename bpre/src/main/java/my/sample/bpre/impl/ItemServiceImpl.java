@@ -19,16 +19,16 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @GET
     @Path("/")
-    public List<Item> find() {
-        System.out.println("find/");
+    public List<Item> findAll() {
+        System.out.println("GET:: findAll");
         return repository.get();
     }
 
     @Override
     @GET
     @Path("/{id}")
-    public Item findAll(@PathParam("id") String id) {
-        System.out.println("findAll/" + id);
+    public Item find(@PathParam("id") String id) {
+        System.out.println("GET:: find/" + id);
         return repository.get(id);
     }
 
@@ -36,7 +36,7 @@ public class ItemServiceImpl implements ItemService {
     @PUT
     @Path("/{id}")
     public Item update(@PathParam("id") String id, Item item) {
-        System.out.println("update/" + id);
+        System.out.println("PUT:: update/" + id);
         item.setId(id);
         return repository.update(item);
     }
@@ -45,7 +45,7 @@ public class ItemServiceImpl implements ItemService {
     @POST
     @Path("/")
     public Item add(Item item) {
-        System.out.println("add/" + item.getId());
+        System.out.println("POST:: add/" + item.getId());
         return repository.add(item);
     }
 }
