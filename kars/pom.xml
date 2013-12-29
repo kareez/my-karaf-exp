@@ -18,7 +18,6 @@
     <name>My Sample :: Feature</name>
     <description>Creates a sample karaf feature.</description>
 
-
     <build>
         <plugins>
             <plugin>
