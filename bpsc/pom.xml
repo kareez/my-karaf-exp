@@ -9,12 +9,10 @@
         <groupId>my.sample</groupId>
         <artifactId>parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../</relativePath>
     </parent>
 
     <artifactId>bpsc</artifactId>
     <packaging>bundle</packaging>
-    <version>1.0-SNAPSHOT</version>
 
     <name>My Sample :: Client</name>
     <description>a client for blueprint service</description>
@@ -37,7 +35,12 @@
         <dependency>
             <groupId>my.sample</groupId>
             <artifactId>bps</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>my.sample</groupId>
+            <artifactId>bactv</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>
@@ -60,6 +63,7 @@
                             *
                         </Import-Package>
                         <Private-Package>!*</Private-Package>
+                        <Bundle-Activator>my.sample.bactv.MyBundleActivator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

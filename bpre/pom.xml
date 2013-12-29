@@ -12,7 +12,6 @@
     </parent>
 
     <artifactId>bpre</artifactId>
-    <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
     <name>My Sample :: Rest</name>
@@ -50,6 +49,11 @@
             <artifactId>cxf-rt-transports-http-jetty</artifactId>
             <version>${cxf.version}</version>
         </dependency>
+        <dependency>
+            <groupId>my.sample</groupId>
+            <artifactId>bactv</artifactId>
+            <version>${project.version}</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -67,6 +71,7 @@
                             org.apache.cxf.*;version="[2,4)",
                             *
                         </Import-Package>
+                        <Bundle-Activator>my.sample.bactv.MyBundleActivator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
