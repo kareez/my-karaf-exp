@@ -5,6 +5,11 @@ package my.sample.blueprint;
  */
 public interface SampleService {
 
-    public String echo(String message);
-
+    /**
+     * Concatenates a fixed string with the given message and return the result.
+     *
+     * @param message given message
+     * @return the concatenation of a fixed string and given message
+     */
+    String echo(String message);
 }
