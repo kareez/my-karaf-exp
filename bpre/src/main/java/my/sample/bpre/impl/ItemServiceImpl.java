@@ -11,7 +11,7 @@ import java.util.List;
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-@Produces(MediaType.APPLICATION_XML)
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public class ItemServiceImpl implements ItemService {
     private ItemRepository repository = new ItemRepository();
 
