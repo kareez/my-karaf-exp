@@ -3,7 +3,6 @@ package my.sample.bpre.impl;
 import my.sample.bpre.api.Item;
 import my.sample.bpre.api.ItemService;
 
-import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.util.List;
@@ -12,7 +11,6 @@ import java.util.List;
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
 @Produces(MediaType.APPLICATION_XML)
-@WebService
 public class ItemServiceImpl implements ItemService {
     private ItemRepository repository = new ItemRepository();
 
