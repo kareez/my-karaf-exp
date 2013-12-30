@@ -1,5 +1,6 @@
 package my.sample.bpre.api;
 
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -11,7 +12,9 @@ public interface ItemService {
 
     Item find(String id);
 
-    Item update(String id, Item item);
+    Response update(String id, Item item);
 
-    Item add(Item item);
+    Response add(Item item);
+
+    Response delete(String id);
 }
