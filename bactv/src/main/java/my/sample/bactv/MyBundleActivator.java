@@ -21,11 +21,11 @@ public class MyBundleActivator implements BundleActivator {
     }
 
     private void log(BundleContext context, String message) {
-        ServiceReference ref = context.getServiceReference(LogService.class.getName());
+        ServiceReference<?> reference = context.getServiceReference(LogService.class.getName());
 
-        if (ref != null) {
-            LogService log = (LogService) context.getService(ref);
-            log.log(LogService.LOG_INFO, message);
+        if (reference != null) {
+            LogService logger = (LogService) context.getService(reference);
+            logger.log(LogService.LOG_INFO, message);
 
         } else {
             System.out.println(message);

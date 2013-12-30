@@ -47,4 +47,11 @@ class ItemRepository {
         items.put(item.getId(), item);
         return items.get(item.getId());
     }
+
+    Item delete(String id) {
+        if (items.containsKey(id)) {
+            return items.remove(id);
+        }
+        throw new IllegalArgumentException("Item not found. (item #" + id + ")");
+    }
 }

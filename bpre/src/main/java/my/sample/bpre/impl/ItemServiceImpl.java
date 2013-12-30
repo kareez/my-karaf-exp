@@ -3,16 +3,15 @@ package my.sample.bpre.impl;
 import my.sample.bpre.api.Item;
 import my.sample.bpre.api.ItemService;
 
-import javax.jws.WebService;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-@Produces(MediaType.APPLICATION_XML)
-@WebService
+@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public class ItemServiceImpl implements ItemService {
     private ItemRepository repository = new ItemRepository();
 
@@ -35,17 +34,46 @@ public class ItemServiceImpl implements ItemService {
     @Override
     @PUT
     @Path("/{id}")
-    public Item update(@PathParam("id") String id, Item item) {
+    public Response update(@PathParam("id") String id, Item item) {
         System.out.println("PUT:: update/" + id);
         item.setId(id);
-        return repository.update(item);
+
+        try {
+            Item updated = repository.update(item);
+            return Response.ok(updated).build();
+
+        } catch (IllegalArgumentException e) {
+            return Response.notModified(e.getMessage()).build();
+        }
     }
 
     @Override
     @POST
     @Path("/")
-    public Item add(Item item) {
+    public Response add(Item item) {
         System.out.println("POST:: add/" + item.getId());
-        return repository.add(item);
+
+        try {
+            Item added = repository.add(item);
+            return Response.ok(added).build();
+
+        } catch (IllegalArgumentException e) {
+            return Response.notModified(e.getMessage()).build();
+        }
+    }
+
+    @Override
+    @DELETE
+    @Path("/{id}")
+    public Response delete(@PathParam("id") String id) {
+        System.out.println("DELETE:: delete/" + id);
+
+        try {
+            Item item = repository.delete(id);
+            return Response.ok(item).build();
+
+        } catch (IllegalArgumentException e) {
+            return Response.notModified(e.getMessage()).build();
+        }
     }
 }

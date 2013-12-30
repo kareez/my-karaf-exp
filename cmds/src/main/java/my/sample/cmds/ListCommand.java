@@ -17,6 +17,6 @@ public class ListCommand extends OsgiCommandSupport {
     protected Object doExecute() throws Exception {
          System.out.println("Executing command: ListCommand");
 
-         return new String[] {"A...", "B...", "C...", arg == null ? "no argument" : arg};
+         return new String[] {"Given parameter: ", arg == null ? "no argument" : arg};
     }
 }
