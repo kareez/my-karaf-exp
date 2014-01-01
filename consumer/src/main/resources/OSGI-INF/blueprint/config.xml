@@ -10,4 +10,15 @@
             </action>
         </command>
     </command-bundle>
+
+    <reference-list id="myDecorators" interface="my.sample.provider.SampleDecorator"/>
+
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
+        <command name="my/decorate">
+            <action class="my.sample.consumer.DecoratorCommand">
+                <property name="decorators" ref="myDecorators" />
+            </action>
+        </command>
+    </command-bundle>
+
 </blueprint>
