@@ -1,9 +1,11 @@
-package my.sample.provider;
+package my.sample.provider.impl;
+
+import my.sample.provider.SampleService;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public class SampleServiceImpl implements SampleService {
+public class DefaultSampleService implements SampleService {
 
     public String echo(String message) {
         return "Echo processed: " + message;
