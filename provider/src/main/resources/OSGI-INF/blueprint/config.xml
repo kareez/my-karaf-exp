@@ -5,12 +5,14 @@
 
     <service ref="sampleService" interface="my.sample.provider.SampleService"/>
 
-    <bean id="starDecorator" class="my.sample.provider.impl.StarDecorator"/>
-    <bean id="hashDecorator" class="my.sample.provider.impl.HashDecorator"/>
-    <bean id="quoteDecorator" class="my.sample.provider.impl.QuoteDecorator"/>
-
-    <service ref="starDecorator" interface="my.sample.provider.SampleDecorator"/>
-    <service ref="hashDecorator" interface="my.sample.provider.SampleDecorator"/>
-    <service ref="quoteDecorator" interface="my.sample.provider.SampleDecorator"/>
+    <service id="starDecorator" interface="my.sample.provider.SampleDecorator">
+        <bean class="my.sample.provider.impl.StarDecorator" />
+    </service>
+    <service id="hashDecorator" interface="my.sample.provider.SampleDecorator">
+        <bean class="my.sample.provider.impl.HashDecorator" />
+    </service>
+    <service id="quoteDecorator" interface="my.sample.provider.SampleDecorator">
+        <bean class="my.sample.provider.impl.QuoteDecorator" />
+    </service>
 
 </blueprint>
