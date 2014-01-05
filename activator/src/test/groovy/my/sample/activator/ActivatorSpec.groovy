@@ -30,11 +30,6 @@ class ActivatorSpec extends Specification {
 
         then:
         1 * service.log(LogService.LOG_WARNING, "Starting Bundle: (bundle-symbolic-name: 1.0.0)")
-        1 * context.getServiceReference(_ as String)
-//        1 * context.getService(_ as ServiceReference)
-//        1 * context.getBundle()
-//        1 * bundle.getVersion()
-//        1 * bundle.getSymbolicName()
     }
 
     def "Stop a bundle"() {
@@ -43,10 +38,5 @@ class ActivatorSpec extends Specification {
 
         then:
         1 * service.log(LogService.LOG_WARNING, "Stopping Bundle: (bundle-symbolic-name: 1.0.0)")
-//        1 * context.getServiceReference(_ as String)
-//        1 * context.getService(_ as ServiceReference)
-//        1 * context.getBundle()
-//        1 * bundle.getSymbolicName()
-//        1 * bundle.getVersion()
     }
 }
