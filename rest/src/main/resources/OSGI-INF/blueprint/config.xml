@@ -10,7 +10,7 @@
         </cxf:features>
     </cxf:bus>
 
-    <reference id="logService" interface="org.osgi.service.log.LogService" availability="optional"/>
+    <reference id="logService" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
 
     <jaxrs:server address="/items" id="itemService">
         <jaxrs:serviceBeans>

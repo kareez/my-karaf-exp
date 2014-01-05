@@ -2,7 +2,7 @@
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 
     <reference id="mySampleService" interface="my.sample.provider.SampleService" />
-    <reference id="logService" interface="org.osgi.service.log.LogService" availability="optional"/>
+    <reference id="logService" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="my/echo">

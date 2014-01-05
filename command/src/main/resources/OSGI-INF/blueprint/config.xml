@@ -3,7 +3,7 @@
 
     <bean id="sampleCompleter" class="my.sample.command.ListCommandCompleter" />
 
-    <reference id="logService" interface="org.osgi.service.log.LogService" availability="optional"/>
+    <reference id="logService" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
 
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="my/list">

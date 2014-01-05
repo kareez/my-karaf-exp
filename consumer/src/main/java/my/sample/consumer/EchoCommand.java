@@ -1,10 +1,10 @@
 package my.sample.consumer;
 
+import my.sample.activator.SampleLogger;
 import my.sample.provider.SampleService;
 import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
-import org.osgi.service.log.LogService;
 
 
 /**
@@ -18,27 +18,19 @@ public class EchoCommand extends OsgiCommandSupport {
 
     private SampleService service;
 
-    private LogService logger;
+    private SampleLogger logger;
 
     public void setService(SampleService service) {
         this.service = service;
     }
 
-    public void setLogger(LogService logger) {
+    public void setLogger(SampleLogger logger) {
         this.logger = logger;
     }
 
     protected Object doExecute() throws Exception {
-         log("Executing command: Echo");
+        logger.warn("Executing command: Echo");
 
-         return service.echo(arg == null ? "<not given>" : arg);
-    }
-
-    private void log(String message) {
-        if (logger != null) {
-            logger.log(LogService.LOG_WARNING, message);
-        } else {
-            System.out.println(message);
-        }
+        return service.echo(arg == null ? "<not given>" : arg);
     }
 }
