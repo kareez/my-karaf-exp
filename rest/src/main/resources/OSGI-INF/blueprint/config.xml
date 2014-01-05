@@ -14,7 +14,9 @@
 
     <jaxrs:server address="/items" id="itemService">
         <jaxrs:serviceBeans>
-            <bean class="my.sample.rest.impl.ItemServiceImpl" />
+            <bean class="my.sample.rest.impl.ItemServiceImpl">
+                <property name="logger" ref="logService" />
+            </bean>
         </jaxrs:serviceBeans>
         <jaxrs:invoker>
             <bean class="my.sample.rest.impl.SampleInvoker">

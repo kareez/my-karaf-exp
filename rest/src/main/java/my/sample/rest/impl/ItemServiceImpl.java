@@ -2,6 +2,7 @@ package my.sample.rest.impl;
 
 import my.sample.rest.api.Item;
 import my.sample.rest.api.ItemService;
+import org.osgi.service.log.LogService;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -15,11 +16,25 @@ import java.util.List;
 public class ItemServiceImpl implements ItemService {
     private ItemRepository repository = new ItemRepository();
 
+    private LogService logger;
+
+    public void setLogger(LogService logger) {
+        this.logger = logger;
+    }
+
+    private void log(String message) {
+        if (logger != null) {
+            logger.log(LogService.LOG_WARNING, message);
+        } else {
+            System.out.println(message);
+        }
+    }
+
     @Override
     @GET
     @Path("/")
     public List<Item> findAll() {
-        System.out.println("GET:: findAll");
+        log("GET:: findAll");
         return repository.get();
     }
 
@@ -27,7 +42,7 @@ public class ItemServiceImpl implements ItemService {
     @GET
     @Path("/{id}")
     public Item find(@PathParam("id") String id) {
-        System.out.println("GET:: find/" + id);
+        log("GET:: find/" + id);
         return repository.get(id);
     }
 
@@ -35,7 +50,7 @@ public class ItemServiceImpl implements ItemService {
     @PUT
     @Path("/{id}")
     public Response update(@PathParam("id") String id, Item item) {
-        System.out.println("PUT:: update/" + id);
+        log("PUT:: update/" + id);
         item.setId(id);
 
         try {
@@ -51,7 +66,7 @@ public class ItemServiceImpl implements ItemService {
     @POST
     @Path("/")
     public Response add(Item item) {
-        System.out.println("POST:: add/" + item.getId());
+        log("POST:: add/" + item.getId());
 
         try {
             Item added = repository.add(item);
@@ -66,7 +81,7 @@ public class ItemServiceImpl implements ItemService {
     @DELETE
     @Path("/{id}")
     public Response delete(@PathParam("id") String id) {
-        System.out.println("DELETE:: delete/" + id);
+        log("DELETE:: delete/" + id);
 
         try {
             Item item = repository.delete(id);
