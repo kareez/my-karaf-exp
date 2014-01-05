@@ -3,9 +3,13 @@
 
     <bean id="sampleCompleter" class="my.sample.command.ListCommandCompleter" />
 
+    <reference id="logService" interface="org.osgi.service.log.LogService" availability="optional"/>
+
     <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
         <command name="my/list">
-            <action class="my.sample.command.ListCommand" />
+            <action class="my.sample.command.ListCommand">
+                <property name="logger" ref="logService" />
+            </action>
             <completers>
                 <ref component-id="sampleCompleter" />
             </completers>
