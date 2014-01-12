@@ -16,6 +16,9 @@
 
     <name>My Sample :: Rest</name>
     <description>A sample rest service.</description>
+    <scm>
+        <developerConnection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</developerConnection>
+    </scm>
 
     <properties>
         <cxf.version>2.7.5</cxf.version>

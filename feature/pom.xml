@@ -13,6 +13,9 @@
 
     <artifactId>feature</artifactId>
     <packaging>pom</packaging>
+    <scm>
+        <developerConnection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</developerConnection>
+    </scm>
 
     <name>My Sample :: Feature</name>
     <description>A sample karaf feature.</description>

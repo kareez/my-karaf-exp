@@ -16,6 +16,9 @@
 
     <name>My Sample :: Command</name>
     <description>A sample osgi command.</description>
+    <scm>
+        <developerConnection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</developerConnection>
+    </scm>
 
     <dependencies>
         <dependency>

@@ -15,6 +15,9 @@
 
     <name>My Sample :: Provider</name>
     <description>A sample service provider.</description>
+    <scm>
+        <developerConnection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</developerConnection>
+    </scm>
 
     <dependencies>
         <dependency>

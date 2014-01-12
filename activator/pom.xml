@@ -16,6 +16,9 @@
 
     <name>My Sample :: Activator</name>
     <description>A sample bundle activator.</description>
+    <scm>
+        <developerConnection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</developerConnection>
+    </scm>
 
     <dependencies>
         <dependency>

@@ -16,6 +16,9 @@
 
     <name>My Sample :: Consumer</name>
     <description>A sample service consumer.</description>
+    <scm>
+        <developerConnection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</developerConnection>
+    </scm>
 
     <dependencies>
         <dependency>
