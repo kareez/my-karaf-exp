@@ -1,5 +1,7 @@
 package my.sample.rest.impl;
 
+import my.sample.activator.SampleLogger;
+import my.sample.rest.api.ItemService;
 import org.apache.cxf.endpoint.Server;
 import org.apache.cxf.jaxrs.JAXRSServerFactoryBean;
 import org.apache.cxf.jaxrs.lifecycle.SingletonResourceProvider;
@@ -17,7 +19,30 @@ public class Starter {
 
         factory.setAddress("http://localhost:8282/repo");
         factory.setResourceClasses(ItemServiceImpl.class);
-        factory.setResourceProvider(new SingletonResourceProvider(new ItemServiceImpl()));
+        ItemServiceImpl service  = new ItemServiceImpl();
+        service.setLogger(new SampleLogger() {
+            @Override
+            public void debug(String message) {
+
+            }
+
+            @Override
+            public void info(String message) {
+
+            }
+
+            @Override
+            public void warn(String message) {
+
+            }
+
+            @Override
+            public void error(String message) {
+
+            }
+        });
+
+        factory.setResourceProvider(new SingletonResourceProvider(service));
         factory.setProvider(new JAXBElementProvider());
 
         Server server = factory.create();
