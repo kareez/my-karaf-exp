@@ -20,6 +20,9 @@
 
     <name>My Sample</name>
     <description>A sample project to expreience blueprint, karaf and ...</description>
+    <scm>
+        <connection>git@github.com:mhshams/my-karaf-exp.git</connection>
+    </scm>
 
     <dependencyManagement>
         <dependencies>
