@@ -14,7 +14,7 @@
     <artifactId>feature</artifactId>
     <packaging>pom</packaging>
     <scm>
-        <connection>git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
+        <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
     </scm>
 
     <name>My Sample :: Feature</name>
