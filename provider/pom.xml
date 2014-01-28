@@ -5,7 +5,7 @@
     <parent>
         <artifactId>my-sample</artifactId>
         <groupId>my.sample</groupId>
-        <version>1.0</version>
+        <version>1.1-SNAPSHOT</version>
     </parent>
 
     <artifactId>provider</artifactId>
@@ -15,7 +15,7 @@
     <description>A sample service provider.</description>
     <scm>
         <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
-      <tag>first-release</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <dependencies>
