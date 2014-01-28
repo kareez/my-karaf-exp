@@ -5,7 +5,7 @@
 
     <groupId>my.sample</groupId>
     <artifactId>my-sample</artifactId>
-    <version>1.0</version>
+    <version>1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <modules>
@@ -21,7 +21,7 @@
     <description>A sample project to expreience blueprint, karaf and ...</description>
     <scm>
         <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git</connection>
-      <tag>first-release</tag>
+      <tag>HEAD</tag>
   </scm>
 
     <dependencyManagement>
