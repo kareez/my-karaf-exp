@@ -21,7 +21,6 @@
     <description>A sample project to expreience blueprint, karaf and ...</description>
     <scm>
         <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git</connection>
-      <tag>HEAD</tag>
   </scm>
 
     <dependencyManagement>

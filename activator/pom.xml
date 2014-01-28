@@ -16,7 +16,6 @@
     <description>A sample bundle activator.</description>
     <scm>
         <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
-      <tag>HEAD</tag>
   </scm>
 
     <dependencies>
