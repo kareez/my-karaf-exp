@@ -15,6 +15,7 @@
         <module>provider</module>
         <module>consumer</module>
         <module>feature</module>
+        <module>factory</module>
         <module>rest</module>
     </modules>
 
