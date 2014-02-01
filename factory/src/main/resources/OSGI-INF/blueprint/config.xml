@@ -4,12 +4,8 @@
            default-activation="lazy">
 
     <cm:managed-service-factory factory-pid="my.sample.factory" interface="my.sample.factory.SampleFactoryService">
-        <cm:managed-component class="my.sample.factory.impl.DefaultSampleFactoryService" init-method="init">
-            <property name="internalBean" >
-                <bean class="my.sample.factory.impl.InternalBean">
-                    <property name="foo" value="default" />
-                </bean>
-            </property>
+        <cm:managed-component class="my.sample.factory.impl.DefaultSampleFactoryService" init-method="init" destroy-method="destroy">
+            <cm:managed-properties persistent-id="" update-strategy="component-managed" update-method="update" />
         </cm:managed-component>
     </cm:managed-service-factory>
 
