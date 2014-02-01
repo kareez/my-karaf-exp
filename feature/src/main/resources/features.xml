@@ -7,10 +7,11 @@
     <feature name="${project.artifactId}" description="${project.name}" version="${project.version}">
         <details>${project.description}</details>
         <feature version="2.7.5">cxf</feature>
-        <bundle>mvn:my.sample/activator/1.0-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/command/1.0-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/provider/1.0-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/consumer/1.0-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/rest/1.0-SNAPSHOT</bundle>
+        <bundle>mvn:my.sample/activator/1.1-SNAPSHOT</bundle>
+        <bundle>mvn:my.sample/command/1.1-SNAPSHOT</bundle>
+        <bundle>mvn:my.sample/provider/1.1-SNAPSHOT</bundle>
+        <bundle>mvn:my.sample/consumer/1.1-SNAPSHOT</bundle>
+        <bundle>mvn:my.sample/factory/1.1-SNAPSHOT</bundle>
+        <bundle>mvn:my.sample/rest/1.1-SNAPSHOT</bundle>
     </feature>
 </features>

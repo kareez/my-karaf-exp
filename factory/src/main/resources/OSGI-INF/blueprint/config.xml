@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0"
+           xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
+           default-activation="lazy">
+
+    <cm:managed-service-factory factory-pid="my.sample.factory" interface="my.sample.factory.SampleFactoryService">
+        <cm:managed-component class="my.sample.factory.impl.DefaultSampleFactoryService" init-method="init">
+            <property name="internalBean" >
+                <bean class="my.sample.factory.impl.InternalBean">
+                    <property name="foo" value="default" />
+                </bean>
+            </property>
+        </cm:managed-component>
+    </cm:managed-service-factory>
+
+</blueprint>
