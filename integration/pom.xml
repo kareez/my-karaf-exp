@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>my-sample</artifactId>
+        <groupId>my.sample</groupId>
+        <version>1.1-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>integration</artifactId>
+
+    <name>My Sample :: Integration</name>
+    <description>A sample Integration Test Module.</description>
+    <scm>
+        <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
+    </scm>
+    <properties>
+        <karaf.version>2.3.3</karaf.version>
+        <felix.gogo.version>0.10.0</felix.gogo.version>
+        <pax.exam.version>2.6.0</pax.exam.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.karaf</groupId>
+            <artifactId>apache-karaf</artifactId>
+            <version>${karaf.version}</version>
+            <scope>test</scope>
+            <type>tar.gz</type>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.karaf</groupId>
+                    <artifactId>org.apache.karaf.client</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.gogo.runtime</artifactId>
+            <version>${felix.gogo.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>org.apache.karaf.features.core</artifactId>
+            <version>${karaf.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.tooling.exam</groupId>
+            <artifactId>org.apache.karaf.tooling.exam.container</artifactId>
+            <version>${karaf.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-junit4</artifactId>
+            <version>${pax.exam.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.servicemix.tooling</groupId>
+                <artifactId>depends-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-depends-file</id>
+                        <goals>
+                            <goal>generate-depends-file</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jar-test-classes</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>ci-build-profile</id>
+            <activation>
+                <property>
+                    <name>maven.repo.local</name>
+                </property>
+            </activation>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <!-- when the local repo location has been specified, we need to pass on this information to PAX mvn url -->
+                            <argLine>-Dorg.ops4j.pax.url.mvn.localRepository=${maven.repo.local}</argLine>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+</project>
