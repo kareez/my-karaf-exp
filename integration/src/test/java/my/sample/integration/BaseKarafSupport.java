@@ -22,11 +22,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.PrintStream;
 import java.util.*;
-import java.util.concurrent.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 
-import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.karafDistributionConfiguration;
-import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.keepRuntimeFolder;
-import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.logLevel;
+import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.*;
 import static org.ops4j.pax.exam.CoreOptions.maven;
 
 /**
@@ -53,7 +54,7 @@ public class BaseKarafSupport {
 
     @Configuration
     public Option[] config() {
-        return new Option[] {
+        return new Option[]{
                 karafDistributionConfiguration()
                         .frameworkUrl(maven()
                                 .groupId("org.apache.karaf")
@@ -95,21 +96,19 @@ public class BaseKarafSupport {
         final PrintStream printStream = new PrintStream(byteArrayOutputStream);
         final CommandProcessor commandProcessor = getOsgiService(CommandProcessor.class);
         final CommandSession commandSession = commandProcessor.createSession(System.in, printStream, System.err);
-        FutureTask<String> commandFuture = new FutureTask<>(
-                new Callable<String>() {
-                    public String call() {
-                        try {
-                            if (!silent) {
-                                System.err.println(command);
-                            }
-                            commandSession.execute(command);
-                        } catch (Exception e) {
-                            e.printStackTrace(System.err);
-                        }
-                        printStream.flush();
-                        return byteArrayOutputStream.toString();
-                    }
-                });
+        FutureTask<String> commandFuture = new FutureTask<>(() -> {
+            try {
+                if (!silent) {
+                    System.err.println(command);
+                }
+                commandSession.execute(command);
+            } catch (Exception e) {
+                e.printStackTrace(System.err);
+            }
+            printStream.flush();
+            return byteArrayOutputStream.toString();
+        }
+        );
 
         try {
             executor.submit(commandFuture);

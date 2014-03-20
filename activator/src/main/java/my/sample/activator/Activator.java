@@ -21,7 +21,7 @@ public class Activator implements BundleActivator {
     }
 
     private void log(BundleContext context, String message) {
-        ServiceReference reference = context.getServiceReference(LogService.class.getName());
+        ServiceReference<?> reference = context.getServiceReference(LogService.class.getName());
 
         if (reference != null) {
             LogService logger = (LogService) context.getService(reference);
