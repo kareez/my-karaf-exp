@@ -3,6 +3,7 @@ package my.sample.command;
 import org.apache.karaf.shell.console.Completer;
 import org.apache.karaf.shell.console.completer.StringsCompleter;
 
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -14,11 +15,8 @@ public class ListCommandCompleter implements Completer {
     public int complete(String buffer, int cursor, List candidates) {
         StringsCompleter delegate = new StringsCompleter();
 
-        delegate.getStrings().add("one");
-        delegate.getStrings().add("two");
-        delegate.getStrings().add("three");
-        delegate.getStrings().add("four");
-        delegate.getStrings().add("five");
+        Arrays.asList("one", "two", "three", "four", "five")
+                .forEach(delegate.getStrings()::add);
 
         return delegate.complete(buffer, cursor, candidates);
     }

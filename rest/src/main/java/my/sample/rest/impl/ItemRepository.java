@@ -12,7 +12,7 @@ import java.util.Map;
  */
 
 class ItemRepository {
-    Map<String, Item> items = new HashMap<String, Item>();
+    Map<String, Item> items = new HashMap<>();
 
     ItemRepository() {
         for (int i = 1; i < 4; i++) {
@@ -22,7 +22,7 @@ class ItemRepository {
     }
 
     List<Item> get() {
-        return new ArrayList<Item>(items.values());
+        return new ArrayList<>(items.values());
     }
 
     Item get(String id) {

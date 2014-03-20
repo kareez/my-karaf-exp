@@ -5,8 +5,8 @@ import org.apache.felix.gogo.commands.Argument;
 import org.apache.felix.gogo.commands.Command;
 import org.apache.karaf.shell.console.OsgiCommandSupport;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
@@ -29,11 +29,8 @@ public class DecoratorCommand extends OsgiCommandSupport {
             return "<no decorator found>";
         }
 
-        List<String> results = new ArrayList<>(decorators.size());
-        for (SampleDecorator decorator : decorators) {
-            results.add(decorator.decorate(arg == null ? "<not given>" : arg));
-        }
+        String param = arg == null ? "<not given>" : arg;
 
-        return results;
+        return decorators.stream().map(decorator -> decorator.decorate(param)).collect(Collectors.toList());
     }
 }
