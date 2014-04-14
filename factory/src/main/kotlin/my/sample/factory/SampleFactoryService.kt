@@ -1,9 +1,9 @@
-package my.sample.factory;
+package my.sample.factory
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public interface SampleFactoryService {
+public trait SampleFactoryService {
 
     /**
      * Concatenates a fixed string with the given message and return the result.
@@ -11,5 +11,5 @@ public interface SampleFactoryService {
      * @param message given message
      * @return the concatenation of a fixed string and given message
      */
-    String echo(String message);
+    fun echo(message: String): String
 }
