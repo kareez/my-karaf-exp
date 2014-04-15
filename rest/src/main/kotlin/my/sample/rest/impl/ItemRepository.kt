@@ -13,7 +13,7 @@ class ItemRepository {
     val items = hashMapOf<String, Item>();
 
     {
-        for (i in 1..4) {
+        for (i in 1..3) {
             val id = "$i"
             items.put(id,  Item.newItem(id, "Item #$id", "Description for item #$id"))
         }
