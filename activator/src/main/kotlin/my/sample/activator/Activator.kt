@@ -12,12 +12,12 @@ import org.osgi.service.log.LogService
 public class Activator : BundleActivator {
     override fun start(bundleContext: BundleContext?) {
         val context = bundleContext!!
-        log(context, ">>> Starting Bundle: (${getInfo(context.getBundle()!!)})")
+        log(context, "Starting Bundle: (${getInfo(context.getBundle()!!)})")
     }
 
     override fun stop(bundleContext: BundleContext?) {
         val context = bundleContext!!
-        log(context, ">>> Stopping Bundle: (${getInfo(context.getBundle()!!)})")
+        log(context, "Stopping Bundle: (${getInfo(context.getBundle()!!)})")
     }
 
     private fun log(context: BundleContext, message: String) {
