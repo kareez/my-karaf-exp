@@ -23,6 +23,6 @@ public class EchoCommand : OsgiCommandSupport() {
     override fun doExecute(): Any? {
         logger?.warn("Executing command: Echo")
 
-        return service?.echo(if (arg != null) arg else "<not given>")
+        return service?.echo(if (arg != null) arg!! else "<not given>")
     }
 }

@@ -24,7 +24,7 @@ public class DecoratorCommand : OsgiCommandSupport() {
             return "<no decorator found>"
         }
 
-        val param = if (arg == null) "<not given>" else arg
+        val param: String = if (arg == null) "<not given>" else arg!!
 
         return decorators?.map { it.decorate(param) }?.toArrayList()
     }
