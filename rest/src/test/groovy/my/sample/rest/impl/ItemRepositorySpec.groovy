@@ -38,7 +38,7 @@ class ItemRepositorySpec extends Specification {
     }
 
     def "check update(item)"() {
-        def item = new Item("1", "ok", "ok desc")
+        def item = Item.object$.newItem("1", "ok", "ok desc")
         repo.update(item)
 
         when:
@@ -51,7 +51,7 @@ class ItemRepositorySpec extends Specification {
     }
 
     def "check add(item)"() {
-        def item = new Item("33", "ok", "ok desc")
+        def item = Item.object$.newItem("33", "ok", "ok desc")
         repo.add(item)
 
         when:

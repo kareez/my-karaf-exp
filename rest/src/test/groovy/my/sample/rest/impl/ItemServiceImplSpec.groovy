@@ -43,7 +43,7 @@ class ItemServiceImplSpec extends Specification {
     }
 
     def "check successful update(id, item)"() {
-        def item = new Item("1", "ok", "ok desc")
+        def item = Item.object$.newItem("1", "ok", "ok desc")
         when:
         def r = service.update(item.id, item)
 
@@ -53,7 +53,7 @@ class ItemServiceImplSpec extends Specification {
     }
 
     def "check failed update(id, item)"() {
-        def item = new Item("unknown", "ok", "ok desc")
+        def item = Item.object$.newItem("unknown", "ok", "ok desc")
         when:
         def r = service.update(item.id, item)
 
@@ -62,7 +62,7 @@ class ItemServiceImplSpec extends Specification {
     }
 
     def "check successful add(item)"() {
-        def item = new Item("33", "ok", "ok desc")
+        def item = Item.object$.newItem("33", "ok", "ok desc")
 
         when:
         def r = service.add(item)
@@ -73,7 +73,7 @@ class ItemServiceImplSpec extends Specification {
     }
 
     def "check failed add(item)"() {
-        def item = new Item("1", "ok", "ok desc")
+        def item = Item.object$.newItem("1", "ok", "ok desc")
         when:
         def r = service.add(item)
 
