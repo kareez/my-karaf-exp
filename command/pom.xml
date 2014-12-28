@@ -14,7 +14,7 @@
     <packaging>bundle</packaging>
 
     <name>My Sample :: Command</name>
-    <description>A sample osgi command.</description>
+    <description>A sample osgi command</description>
     <scm>
         <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
     </scm>
@@ -32,7 +32,6 @@
         <dependency>
             <groupId>my.sample</groupId>
             <artifactId>activator</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.servicemix.bundles</groupId>

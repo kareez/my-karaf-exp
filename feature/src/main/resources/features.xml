@@ -2,16 +2,19 @@
 
 <features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
 
-    <repository>mvn:org.apache.cxf.karaf/apache-cxf/2.7.5/xml/features</repository>
+    <repository>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</repository>
 
     <feature name="${project.artifactId}" description="${project.name}" version="${project.version}">
+
         <details>${project.description}</details>
-        <feature version="2.7.5">cxf</feature>
-        <bundle>mvn:my.sample/activator/1.1-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/command/1.1-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/provider/1.1-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/consumer/1.1-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/factory/1.1-SNAPSHOT</bundle>
-        <bundle>mvn:my.sample/rest/1.1-SNAPSHOT</bundle>
+
+        <feature version="${cxf.version}">cxf</feature>
+
+        <bundle>mvn:my.sample/activator/${project.version}</bundle>
+        <bundle>mvn:my.sample/command/${project.version}</bundle>
+        <bundle>mvn:my.sample/provider/${project.version}</bundle>
+        <bundle>mvn:my.sample/consumer/${project.version}</bundle>
+        <bundle>mvn:my.sample/factory/${project.version}</bundle>
+        <bundle>mvn:my.sample/rest/${project.version}</bundle>
     </feature>
 </features>

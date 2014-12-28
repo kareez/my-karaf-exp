@@ -9,6 +9,27 @@
     <version>1.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
+    <name>My Sample</name>
+    <description>A sample project to expreience blueprint, karaf and ...</description>
+    <scm>
+        <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git</connection>
+    </scm>
+
+    <properties>
+        <osgi.version>4.3.1</osgi.version>
+        <karaf.shell.version>2.3.3</karaf.shell.version>
+        <cxf.version>2.7.5</cxf.version>
+        <!-- test artifacts -->
+        <servicemix.version>4.10_1</servicemix.version>
+        <groovy.version>2.3.9</groovy.version>
+        <spock.version>0.7-groovy-2.0</spock.version>
+        <!-- plugins -->
+        <compiler.plugin.version>3.2</compiler.plugin.version>
+        <bundle.plugin.version>2.5.3</bundle.plugin.version>
+        <install.plugin.version>2.5.2</install.plugin.version>
+        <gmaven.plugin.version>1.5</gmaven.plugin.version>
+    </properties>
+
     <modules>
         <module>activator</module>
         <module>command</module>
@@ -20,46 +41,50 @@
         <module>integration</module>
     </modules>
 
-    <name>My Sample</name>
-    <description>A sample project to expreience blueprint, karaf and ...</description>
-    <scm>
-        <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git</connection>
-    </scm>
-
     <dependencyManagement>
         <dependencies>
+            <!-- main artifacts -->
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.core</artifactId>
-                <version>4.3.1</version>
+                <version>${osgi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.osgi</groupId>
                 <artifactId>org.osgi.compendium</artifactId>
-                <version>4.3.1</version>
+                <version>${osgi.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.karaf.shell</groupId>
                 <artifactId>org.apache.karaf.shell.console</artifactId>
-                <version>2.3.3</version>
+                <version>${karaf.shell.version}</version>
             </dependency>
+            <!-- project artifacts -->
+            <dependency>
+                <groupId>my.sample</groupId>
+                <artifactId>activator</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>my.sample</groupId>
+                <artifactId>provider</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <!-- test artifacts -->
             <dependency>
                 <groupId>org.apache.servicemix.bundles</groupId>
                 <artifactId>org.apache.servicemix.bundles.junit</artifactId>
-                <version>4.10_1</version>
-                <scope>test</scope>
+                <version>${servicemix.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.groovy</groupId>
                 <artifactId>groovy-all</artifactId>
-                <version>2.0.6</version>
-                <scope>test</scope>
+                <version>${groovy.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.spockframework</groupId>
                 <artifactId>spock-core</artifactId>
-                <version>0.7-groovy-2.0</version>
-                <scope>test</scope>
+                <version>${spock.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -70,7 +95,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>2.3.2</version>
+                    <version>${compiler.plugin.version}</version>
                     <inherited>true</inherited>
                     <configuration>
                         <source>1.8</source>
@@ -80,18 +105,23 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>2.4.0</version>
+                    <version>${bundle.plugin.version}</version>
                     <extensions>true</extensions>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${install.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.codehaus.gmaven</groupId>
                     <artifactId>gmaven-plugin</artifactId>
-                    <version>1.5</version>
+                    <version>${gmaven.plugin.version}</version>
                     <dependencies>
                         <dependency>
                             <groupId>org.codehaus.gmaven.runtime</groupId>
                             <artifactId>gmaven-runtime-2.0</artifactId>
-                            <version>1.5</version>
+                            <version>${gmaven.plugin.version}</version>
                             <exclusions>
                                 <exclusion>
                                     <groupId>org.codehaus.groovy</groupId>
@@ -102,7 +132,7 @@
                         <dependency>
                             <groupId>org.codehaus.groovy</groupId>
                             <artifactId>groovy-all</artifactId>
-                            <version>2.0.6</version>
+                            <version>${groovy.version}</version>
                         </dependency>
                     </dependencies>
                 </plugin>

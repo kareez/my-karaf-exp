@@ -17,7 +17,7 @@
     </scm>
 
     <name>My Sample :: Feature</name>
-    <description>A sample karaf feature.</description>
+    <description>A sample karaf feature</description>
 
     <build>
         <plugins>

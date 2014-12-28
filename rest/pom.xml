@@ -14,20 +14,20 @@
     <packaging>bundle</packaging>
 
     <name>My Sample :: Rest</name>
-    <description>A sample rest service.</description>
+    <description>A sample rest service</description>
     <scm>
         <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
     </scm>
 
     <properties>
-        <cxf.version>2.7.5</cxf.version>
+        <ws.rs.api.version>2.0-m10</ws.rs.api.version>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.0-m10</version>
+            <version>${ws.rs.api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
@@ -37,7 +37,6 @@
         <dependency>
             <groupId>my.sample</groupId>
             <artifactId>activator</artifactId>
-            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>

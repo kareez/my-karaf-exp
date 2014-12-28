@@ -12,7 +12,7 @@
     <artifactId>integration</artifactId>
 
     <name>My Sample :: Integration</name>
-    <description>A sample Integration Test Module.</description>
+    <description>A sample integration test</description>
     <scm>
         <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
     </scm>
