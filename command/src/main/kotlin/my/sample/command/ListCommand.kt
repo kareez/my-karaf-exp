@@ -1,26 +1,32 @@
 package my.sample.command
 
-import my.sample.activator.SampleLogger
-import org.apache.felix.gogo.commands.Argument as argument
-import org.apache.felix.gogo.commands.Command as command
-import org.apache.karaf.shell.console.OsgiCommandSupport
+import my.sample.activator.Logger
+import org.apache.karaf.shell.api.action.Action
+import org.apache.karaf.shell.api.action.Argument
+import org.apache.karaf.shell.api.action.Command
+import org.apache.karaf.shell.api.action.Completion
+import org.apache.karaf.shell.api.action.lifecycle.Reference
+import org.apache.karaf.shell.api.action.lifecycle.Service
 
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-command(scope = "my", name = "list", description = "a sample command")
-public class ListCommand : OsgiCommandSupport() {
+@Service
+@Command(scope = "my", name = "list", description = "a sample command")
+public class ListCommand : Action {
 
-    argument(index = 0, name = "arg", description = "a sample argument", required = false, multiValued = false)
-    var arg: String? = null
+    @Argument(index = 0, name = "arg", description = "a sample argument", required = false, multiValued = false)
+    @Completion(ListCommandCompleter::class)
+    private var arg: String? = null
 
-    var logger: SampleLogger? = null
+    @Reference
+    private lateinit val logger: Logger
 
+    @Throws(Exception::class)
+    override fun execute(): Any {
+        logger.warn("Executing command: ListCommand")
 
-    override fun doExecute(): Any? {
-        logger?.warn("Executing command: ListCommand")
-
-        return array("Given parameter: ", if (arg != null) arg else "<not given>")
+        return arrayOf("Given parameter: ", arg ?: "<not given>")
     }
 }

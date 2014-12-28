@@ -13,13 +13,13 @@ class DecoratorCommandSpec extends Specification {
     @Unroll
     def "test decorator command with #message"() {
         given:
-        def decorator1 = Mock(Decorator)
-        decorator1.decorate(message) >> "X $message X"
-        def decorator2 = Mock(Decorator)
-        decorator2.decorate(message) >> "Y $message Y"
+        def first = Mock(Decorator)
+        first.decorate(message) >> "X $message X"
+        def second = Mock(Decorator)
+        second.decorate(message) >> "Y $message Y"
 
         def command = new DecoratorCommand();
-        command.decorators = [decorator1, decorator2]
+        command.decorators = [first, second]
         command.arg = message
 
         when:
@@ -30,5 +30,19 @@ class DecoratorCommandSpec extends Specification {
 
         where:
         message << ["one", "two", "a message"]
+    }
+
+    @SuppressWarnings("GroovyAccessibility")
+    @Unroll
+    def "test decorator command without any decorator"() {
+        given:
+        def command = new DecoratorCommand();
+        command.decorators = []
+
+        when:
+        def r = command.execute() as List<String>
+
+        then:
+        r == []
     }
 }

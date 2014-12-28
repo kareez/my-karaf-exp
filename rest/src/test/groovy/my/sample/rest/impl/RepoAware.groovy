@@ -14,13 +14,13 @@ abstract class RepoAware extends Specification {
     EntityManagerFactory emf
     EntityManager em
 
-    ItemRepository repo
+    JpaItemRepository repo
 
     def internalSetup() {
         emf = Persistence.createEntityManagerFactory("test-unit")
         em = emf.createEntityManager()
-        repo = new ItemRepository()
-        repo.setEm(em)
+        repo = new JpaItemRepository()
+        repo.em = em
         em.getTransaction().begin()
 
         (1..3).each { repo.add(new Item("$it", "Item #$it", "Description for item #$it")) }

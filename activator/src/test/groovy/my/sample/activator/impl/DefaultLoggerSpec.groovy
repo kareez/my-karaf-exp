@@ -13,8 +13,7 @@ class DefaultLoggerSpec extends Specification {
     def setup() {
         service = Mock(LogService)
 
-        defaultLogger = new DefaultLogger()
-        defaultLogger.logger = service
+        defaultLogger = new DefaultLogger(service)
     }
 
     def "debug a message"() {

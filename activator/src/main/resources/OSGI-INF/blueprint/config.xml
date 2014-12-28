@@ -3,10 +3,9 @@
 
     <service interface="my.sample.activator.Logger">
         <bean class="my.sample.activator.impl.DefaultLogger">
-            <property name="logger">
-                <reference interface="org.osgi.service.log.LogService" availability="optional"/>
-            </property>
+            <argument>
+                <reference interface="org.osgi.service.log.LogService" availability="mandatory"/>
+            </argument>
         </bean>
     </service>
-
 </blueprint>

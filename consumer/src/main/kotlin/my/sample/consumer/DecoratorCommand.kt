@@ -1,31 +1,28 @@
 package my.sample.consumer
 
-import my.sample.provider.SampleDecorator
-import org.apache.felix.gogo.commands.Argument as argument
-import org.apache.felix.gogo.commands.Command as command
-import org.apache.karaf.shell.console.OsgiCommandSupport
-
-import java.util.stream.Collectors
+import my.sample.provider.Decorator
+import org.apache.karaf.shell.api.action.Action
+import org.apache.karaf.shell.api.action.Argument
+import org.apache.karaf.shell.api.action.Command
+import org.apache.karaf.shell.api.action.lifecycle.Reference
+import org.apache.karaf.shell.api.action.lifecycle.Service
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-command(scope = "my", name = "decorate", description = "decorator command")
-public class DecoratorCommand : OsgiCommandSupport() {
+@Service
+@Command(scope = "my", name = "decorate", description = "decorator command")
+public class DecoratorCommand : Action {
 
-    argument(index = 0, name = "arg", description = "message to decorate", required = false, multiValued = false)
-    var arg: String? = null
+    @Argument(index = 0, name = "arg", description = "message to decorate", required = false, multiValued = false)
+    private var arg: String? = null
 
-    var decorators: List<SampleDecorator>? = null
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
+    @Reference
+    lateinit var decorators: java.util.List<Decorator>
 
-    override fun doExecute(): Any? {
-
-        if (decorators == null || decorators?.size() == 0) {
-            return "<no decorator found>"
-        }
-
-        val param: String = if (arg == null) "<not given>" else arg!!
-
-        return decorators?.map { it.decorate(param) }?.toArrayList()
+    @Throws(Exception::class)
+    override fun execute(): Any {
+        return decorators.map { decorator -> decorator.decorate(arg ?: "<not given>") }.orEmpty()
     }
 }

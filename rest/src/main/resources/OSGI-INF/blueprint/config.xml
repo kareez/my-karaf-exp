@@ -14,7 +14,7 @@
     <reference id="sampleLogger" interface="my.sample.activator.Logger" availability="mandatory"/>
     <reference id="factoryService" interface="my.sample.factory.FactoryService" availability="mandatory"/>
 
-    <bean id="repository" class="my.sample.rest.impl.ItemRepository">
+    <bean id="repository" class="my.sample.rest.impl.JpaItemRepository">
         <tx:transaction method="*"/>
     </bean>
 
@@ -26,7 +26,7 @@
 
     <jaxrs:server address="/" id="restService">
         <jaxrs:serviceBeans>
-            <bean class="my.sample.rest.impl.ItemServiceImpl">
+            <bean class="my.sample.rest.impl.RestItemService">
                 <property name="logger" ref="sampleLogger"/>
                 <property name="repository" ref="repository"/>
             </bean>

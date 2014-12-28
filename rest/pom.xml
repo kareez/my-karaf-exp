@@ -90,41 +90,17 @@
         <sourceDirectory>src/main/kotlin</sourceDirectory>
         <plugins>
             <plugin>
-                <artifactId>kotlin-maven-plugin</artifactId>
-                <groupId>org.jetbrains.kotlin</groupId>
-                <version>${kotlin.version}</version>
-                <executions>
-                    <execution>
-                        <id>compile</id>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>compile</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>test-compile</id>
-                        <phase>test-compile</phase>
-                        <goals>
-                            <goal>test-compile</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
                         <Export-Package>my.sample.rest*;version=${project.version}</Export-Package>
-                        <Import-Package>
-                            my.sample.model.api*;version=${project.version},
-                            javax.ws.rs.*;version="[1.1,3)",
-                            org.apache.cxf.*;version="[2,4)",
-                            javax.persistence;version="[2.0,3)",
-                            *
-                        </Import-Package>
                     </instructions>
                 </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>kotlin-maven-plugin</artifactId>
+                <groupId>org.jetbrains.kotlin</groupId>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>

@@ -1,25 +1,20 @@
 package my.sample.command
 
-import org.apache.karaf.shell.console.Completer
-import org.apache.karaf.shell.console.completer.StringsCompleter
-
-import java.util.Arrays
+import org.apache.karaf.shell.api.console.CommandLine
+import org.apache.karaf.shell.api.console.Completer
+import org.apache.karaf.shell.api.console.Session
+import org.apache.karaf.shell.support.completers.StringsCompleter
 
 /**
  * @author Mohammad Shamsi <mohammad.shamsi@zimory.com>
  */
 public class ListCommandCompleter : Completer {
 
-    override fun complete(buffer: String?, cursor: Int, candidates: List<String>?): Int {
+    override fun complete(session: Session, commandLine: CommandLine, candidates: List<String>): Int {
         val delegate = StringsCompleter()
-        val strings = delegate.getStrings()!!
 
-        strings.add("one")
-        strings.add("two")
-        strings.add("three")
-        strings.add("four")
-        strings.add("five")
+        listOf("one", "two", "three", "four", "five").forEach { delegate.strings.add(it) }
 
-        return delegate.complete(buffer, cursor, candidates)
+        return delegate.complete(session, commandLine, candidates)
     }
 }

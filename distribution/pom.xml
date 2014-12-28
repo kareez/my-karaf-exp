@@ -58,7 +58,7 @@
         <dependency>
             <!-- scope is runtime so the feature repo is listed in etc/org.apache.karaf.features.cfg file, and features will installed into the system directory -->
             <groupId>my.sample</groupId>
-            <artifactId>myfeature</artifactId>
+            <artifactId>features</artifactId>
             <classifier>features</classifier>
             <version>${project.version}</version>
             <type>xml</type>
