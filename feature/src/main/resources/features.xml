@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<features name="${project.artifactId}-${project.version}" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
-
-    <repository>mvn:org.apache.cxf.karaf/apache-cxf/${cxf.version}/xml/features</repository>
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" name="${project.artifactId}-${project.version}">
 
     <feature name="${project.artifactId}" description="${project.name}" version="${project.version}">
 
         <details>${project.description}</details>
-
-        <feature version="${cxf.version}">cxf</feature>
 
         <bundle>mvn:my.sample/activator/${project.version}</bundle>
         <bundle>mvn:my.sample/command/${project.version}</bundle>

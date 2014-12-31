@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
@@ -23,6 +24,11 @@
         <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
@@ -59,13 +65,13 @@
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>my.sample.command*;version=${project.version}</Export-Package>
-                        <Import-Package>!my.sample.command*,
+                        <Import-Package>
+                            !my.sample.command*,
                             org.apache.felix.service.command,
-                            org.apache.felix.gogo.commands,
+                            org.apache.karaf.shell.commands,
                             org.apache.karaf.shell.console,
                             *
                         </Import-Package>
-                        <Private-Package>!*</Private-Package>
                         <Bundle-Activator>my.sample.activator.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>

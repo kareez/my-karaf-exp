@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
 
-    <reference id="mySampleService" interface="my.sample.provider.SampleService" />
+    <reference id="mySampleService" interface="my.sample.provider.SampleService"/>
     <reference id="logService" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
-
-    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="my/echo">
-            <action class="my.sample.consumer.EchoCommand">
-                <property name="service" ref="mySampleService" />
-                <property name="logger" ref="logService" />
-            </action>
-        </command>
-    </command-bundle>
 
     <reference-list id="myDecorators" interface="my.sample.provider.SampleDecorator"/>
 
-    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.0.0">
-        <command name="my/decorate">
+    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
+        <command>
+            <action class="my.sample.consumer.EchoCommand">
+                <property name="service" ref="mySampleService"/>
+                <property name="logger" ref="logService"/>
+            </action>
+        </command>
+
+        <command>
             <action class="my.sample.consumer.DecoratorCommand">
-                <property name="decorators" ref="myDecorators" />
+                <property name="decorators" ref="myDecorators"/>
             </action>
         </command>
     </command-bundle>
