@@ -21,10 +21,14 @@
     </scm>
 
     <properties>
-        <ws.rs.api.version>2.0-m10</ws.rs.api.version>
+        <ws.rs.api.version>2.0.1</ws.rs.api.version>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>my.sample</groupId>
+            <artifactId>activator</artifactId>
+        </dependency>
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
@@ -34,10 +38,6 @@
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxrs</artifactId>
             <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>my.sample</groupId>
-            <artifactId>activator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>

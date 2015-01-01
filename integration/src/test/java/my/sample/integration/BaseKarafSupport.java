@@ -2,15 +2,16 @@ package my.sample.integration;
 
 import org.apache.felix.service.command.CommandProcessor;
 import org.apache.felix.service.command.CommandSession;
+import org.apache.karaf.features.BootFinished;
 import org.apache.karaf.features.Feature;
 import org.apache.karaf.features.FeaturesService;
-import org.apache.karaf.tooling.exam.options.LogLevelOption;
 import org.junit.Assert;
-import org.ops4j.pax.exam.MavenUtils;
+import org.ops4j.pax.exam.Configuration;
 import org.ops4j.pax.exam.Option;
+import org.ops4j.pax.exam.ProbeBuilder;
 import org.ops4j.pax.exam.TestProbeBuilder;
-import org.ops4j.pax.exam.junit.Configuration;
-import org.ops4j.pax.exam.junit.ProbeBuilder;
+import org.ops4j.pax.exam.karaf.options.LogLevelOption;
+import org.ops4j.pax.exam.options.MavenArtifactUrlReference;
 import org.osgi.framework.*;
 import org.osgi.util.tracker.ServiceTracker;
 
@@ -27,8 +28,8 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
-import static org.apache.karaf.tooling.exam.options.KarafDistributionOption.*;
 import static org.ops4j.pax.exam.CoreOptions.maven;
+import static org.ops4j.pax.exam.karaf.options.KarafDistributionOption.*;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
@@ -46,26 +47,38 @@ public class BaseKarafSupport {
     @Inject
     protected FeaturesService featuresService;
 
+    /**
+     * To make sure the tests run only when the boot features are fully installed
+     */
+    @SuppressWarnings("UnusedDeclaration")
+    @Inject
+    BootFinished bootFinished;
+
+    @SuppressWarnings("UnusedDeclaration")
     @ProbeBuilder
     public TestProbeBuilder probeConfiguration(TestProbeBuilder probe) {
         probe.setHeader(Constants.DYNAMICIMPORT_PACKAGE, "*,org.apache.felix.service.*;status=provisional");
         return probe;
     }
 
+    @SuppressWarnings("UnusedDeclaration")
     @Configuration
     public Option[] config() {
+        MavenArtifactUrlReference frameworkUrl = maven()
+                .groupId("my.sample")
+                .artifactId("distribution")
+                .versionAsInProject()
+                .type("tar.gz");
+
         return new Option[]{
+//                debugConfiguration("5005", true),
                 karafDistributionConfiguration()
-                        .frameworkUrl(maven()
-                                .groupId("org.apache.karaf")
-                                .artifactId("apache-karaf")
-                                .versionAsInProject()
-                                .type("tar.gz"))
-                        .karafVersion(MavenUtils.getArtifactVersion("org.apache.karaf", "apache-karaf"))
-                        .name("Apache Karaf")
+                        .frameworkUrl(frameworkUrl)
+                        .name("Sample Distribution")
                         .unpackDirectory(new File("target/exam")),
+                configureSecurity()
+                        .enableKarafMBeanServerBuilder(),
                 keepRuntimeFolder(),
-                //new KarafDistributionConfigurationFilePutOption("etc/system.properties", "org.ops4j.pax.url.mvn.localRepository", "/Users/me/code/fake"),
                 logLevel(LogLevelOption.LogLevel.ERROR)
         };
     }

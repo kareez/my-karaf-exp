@@ -3,6 +3,7 @@ package my.sample.rest.impl
 import my.sample.activator.SampleLogger
 import my.sample.rest.api.Item
 import spock.lang.Specification
+import spock.lang.Unroll
 
 import javax.ws.rs.core.Response
 
@@ -25,7 +26,8 @@ class ItemServiceImplSpec extends Specification {
         r.size() == 3
     }
 
-    def "check find(id)"() {
+    @Unroll
+    def "check find(#id)"() {
         when:
         def r = service.find(id)
 

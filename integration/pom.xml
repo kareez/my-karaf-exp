@@ -5,8 +5,8 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>my-sample</artifactId>
         <groupId>my.sample</groupId>
+        <artifactId>my-sample</artifactId>
         <version>1.1-SNAPSHOT</version>
     </parent>
 
@@ -18,21 +18,21 @@
         <connection>scm:git:git@github.com:mhshams/my-karaf-exp.git/${project.artifactId}</connection>
     </scm>
     <properties>
-        <karaf.version>2.3.3</karaf.version>
-        <felix.gogo.version>0.10.0</felix.gogo.version>
-        <pax.exam.version>2.6.0</pax.exam.version>
+        <felix.gogo.version>0.12.1</felix.gogo.version>
+        <pax.exam.version>4.3.0</pax.exam.version>
+        <inject.spec.version>1.0</inject.spec.version>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.apache.karaf</groupId>
-            <artifactId>apache-karaf</artifactId>
-            <version>${karaf.version}</version>
+            <groupId>my.sample</groupId>
+            <artifactId>distribution</artifactId>
+            <version>${project.version}</version>
             <scope>test</scope>
             <type>tar.gz</type>
             <exclusions>
                 <exclusion>
-                    <groupId>org.apache.karaf</groupId>
                     <artifactId>org.apache.karaf.client</artifactId>
+                    <groupId>org.apache.karaf</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -43,21 +43,27 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.karaf.features</groupId>
-            <artifactId>org.apache.karaf.features.core</artifactId>
-            <version>${karaf.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.karaf.tooling.exam</groupId>
-            <artifactId>org.apache.karaf.tooling.exam.container</artifactId>
-            <version>${karaf.version}</version>
+            <groupId>org.ops4j.pax.exam</groupId>
+            <artifactId>pax-exam-container-karaf</artifactId>
+            <version>${pax.exam.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.ops4j.pax.exam</groupId>
             <artifactId>pax-exam-junit4</artifactId>
             <version>${pax.exam.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.geronimo.specs</groupId>
+            <artifactId>geronimo-atinject_1.0_spec</artifactId>
+            <version>${inject.spec.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.karaf.package</groupId>
+            <artifactId>org.apache.karaf.package.core</artifactId>
+            <version>${karaf.version}</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -76,6 +82,7 @@
                 </executions>
             </plugin>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <executions>
                     <execution>
@@ -86,6 +93,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
