@@ -1,5 +1,6 @@
 package my.sample.integration;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.ops4j.pax.exam.junit.PaxExam;
@@ -18,16 +19,17 @@ import static org.junit.Assert.assertTrue;
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
 
+@Ignore
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
 public class SampleSpec extends BaseKarafSupport {
 
     @Test
     public void listCommand() throws Exception {
-        String listOutput = executeCommand("feature:list");
+        String listOutput = executeVoidCommand("feature:list");
         System.out.println(listOutput);
         assertFalse(listOutput.isEmpty());
-        listOutput = executeCommand("feature:list -i");
+        listOutput = executeVoidCommand("feature:list -i");
         System.out.println(listOutput);
         assertFalse(listOutput.isEmpty());
     }

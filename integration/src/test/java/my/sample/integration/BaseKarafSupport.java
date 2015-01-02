@@ -84,26 +84,66 @@ public class BaseKarafSupport {
     }
 
     /**
-     * Executes a shell command and returns output as a String.
+     * Executes a shell command and returns the output.
      * Commands have a default timeout of 10 seconds.
      *
      * @param command the command to execute
      * @return execution result
      */
-    protected String executeCommand(final String command) {
+    protected Object executeCommand(final String command) {
         return executeCommand(command, COMMAND_TIMEOUT, false);
     }
 
     /**
-     * Executes a shell command and returns output as a String.
-     * Commands have a default timeout of 10 seconds.
+     * Executes a shell command and returns the output.
      *
      * @param command The command to execute.
      * @param timeout The amount of time in millis to wait for the command to execute.
      * @param silent  Specifies if the command should be displayed in the screen.
      * @return execution result
      */
-    protected String executeCommand(final String command, final Long timeout, final Boolean silent) {
+    protected Object executeCommand(final String command, final Long timeout, final Boolean silent) {
+        final CommandProcessor commandProcessor = getOsgiService(CommandProcessor.class);
+        final CommandSession commandSession = commandProcessor.createSession(System.in, System.out, System.err);
+        FutureTask<Object> commandFuture = new FutureTask<>(() -> {
+            try {
+                if (!silent) {
+                    System.err.println(command);
+                }
+                return commandSession.execute(command);
+            } catch (Exception e) {
+                return e;
+            }
+        });
+
+        try {
+            executor.submit(commandFuture);
+            return commandFuture.get(timeout, TimeUnit.MILLISECONDS);
+        } catch (Exception e) {
+            return e;
+        }
+    }
+
+    /**
+     * Executes a shell command and returns <code>System.out</code> as a String.
+     * Commands have a default timeout of 10 seconds.
+     *
+     * @param command the command to execute
+     * @return execution result that is written to <code>System.out</code>
+     */
+    protected String executeVoidCommand(final String command) {
+        return executeVoidCommand(command, COMMAND_TIMEOUT, false);
+    }
+
+    /**
+     * Executes a shell command and returns <code>System.out</code> as a String.
+     *
+     * @param command The command to execute.
+     * @param timeout The amount of time in millis to wait for the command to execute.
+     * @param silent  Specifies if the command should be displayed in the screen.
+     * @return execution result that is written to <code>System.out</code>
+     */
+    protected String executeVoidCommand(final String command, final Long timeout, final Boolean silent) {
         String response;
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         final PrintStream printStream = new PrintStream(byteArrayOutputStream);
@@ -120,8 +160,7 @@ public class BaseKarafSupport {
             }
             printStream.flush();
             return byteArrayOutputStream.toString();
-        }
-        );
+        });
 
         try {
             executor.submit(commandFuture);
@@ -183,9 +222,9 @@ public class BaseKarafSupport {
         }
     }
 
-    /*
-    * Explode the dictionary into a ,-delimited list of key=value pairs
-    */
+    /**
+     * Explode the dictionary into a ,-delimited list of key=value pairs
+     */
     private String explode(Dictionary dictionary) {
         Enumeration keys = dictionary.keys();
         StringBuilder result = new StringBuilder();
