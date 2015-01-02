@@ -19,7 +19,7 @@ import static org.junit.Assert.assertTrue;
 public class EchoCommandSpec extends BaseKarafSupport {
 
     @Test
-    public void list() {
+    public void echo() {
         Object result = executeCommand("my:echo foo");
 
         assertTrue(result instanceof String);
@@ -27,7 +27,15 @@ public class EchoCommandSpec extends BaseKarafSupport {
     }
 
     @Test
-    public void listWithNoParameter() {
+    public void echoWithSpacedParameter() {
+        Object result = executeCommand("my:echo 'foo bar'");
+
+        assertTrue(result instanceof String);
+        assertEquals("Echo processed: foo bar", result);
+    }
+
+    @Test
+    public void echoWithNoParameter() {
         Object result = executeCommand("my:echo");
 
         assertTrue(result instanceof String);
@@ -35,7 +43,7 @@ public class EchoCommandSpec extends BaseKarafSupport {
     }
 
     @Test
-    public void listWithTooManyParameters() {
+    public void echoWithTooManyParameters() {
         Object result = executeCommand("my:echo foo bar");
 
         assertTrue(result instanceof CommandException);

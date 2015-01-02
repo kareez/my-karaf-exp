@@ -30,6 +30,17 @@ public class ListCommandSpec extends BaseKarafSupport {
     }
 
     @Test
+    public void listWithSpacedParameter() {
+        Object result = executeCommand("my:list 'foo bar'");
+
+        assertTrue(result instanceof String[]);
+        String[] results = (String[]) result;
+
+        assertEquals("Given parameter: ", results[0]);
+        assertEquals("foo bar", results[1]);
+    }
+
+    @Test
     public void listWithNoParameter() {
         Object result = executeCommand("my:list");
 
