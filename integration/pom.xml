@@ -21,6 +21,7 @@
         <felix.gogo.version>0.12.1</felix.gogo.version>
         <pax.exam.version>4.3.0</pax.exam.version>
         <inject.spec.version>1.0</inject.spec.version>
+        <jackson.version>2.5.0</jackson.version>
     </properties>
     <dependencies>
         <dependency>
@@ -66,6 +67,23 @@
             <version>${karaf.version}</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-rs-client</artifactId>
+            <version>${cxf.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>my.sample</groupId>
+            <artifactId>rest</artifactId>
+            <version>${project.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.groovy</groupId>
+            <artifactId>groovy-all</artifactId>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -90,6 +108,17 @@
                         <phase>package</phase>
                         <goals>
                             <goal>test-jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>gmaven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>testCompile</goal>
                         </goals>
                     </execution>
                 </executions>
