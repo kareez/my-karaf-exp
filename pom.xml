@@ -31,8 +31,9 @@
         <install.plugin.version>2.5.2</install.plugin.version>
         <gmaven.plugin.version>1.5</gmaven.plugin.version>
         <resources.plugin.version>2.6</resources.plugin.version>
-        <jar.plugin.version>2.4</jar.plugin.version>
+        <jar.plugin.version>2.5</jar.plugin.version>
         <surefire.plugin.version>2.18.1</surefire.plugin.version>
+        <failsafe.plugin.version>2.18.1</failsafe.plugin.version>
         <depends.plugin.version>1.2</depends.plugin.version>
     </properties>
 
@@ -146,7 +147,7 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>${jar.plugin.version}}</version>
+                    <version>${jar.plugin.version}</version>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -155,6 +156,16 @@
                     <configuration>
                         <includes>
                             <include>**/*Spec.*</include>
+                        </includes>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-failsafe-plugin</artifactId>
+                    <version>${failsafe.plugin.version}</version>
+                    <configuration>
+                        <includes>
+                            <include>**/*Specification.*</include>
                         </includes>
                     </configuration>
                 </plugin>

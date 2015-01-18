@@ -4,15 +4,14 @@ import my.sample.activator.SampleLogger;
 import my.sample.rest.api.Item;
 import my.sample.rest.api.ItemService;
 
-import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
+import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
+import java.net.URI;
 import java.util.List;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-@Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public class ItemServiceImpl implements ItemService {
     private ItemRepository repository = new ItemRepository();
 
@@ -23,25 +22,23 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @GET
-    @Path("/")
     public List<Item> findAll() {
         logger.warn("GET:: findAll");
         return repository.get();
     }
 
     @Override
-    @GET
-    @Path("/{id}")
-    public Item find(@PathParam("id") String id) {
+    public Item find(String id) {
         logger.warn("GET:: find/" + id);
-        return repository.get(id);
+        try {
+            return repository.get(id);
+        } catch (IllegalArgumentException e) {
+            throw new NotFoundException(e.getMessage(), e);
+        }
     }
 
     @Override
-    @PUT
-    @Path("/{id}")
-    public Response update(@PathParam("id") String id, Item item) {
+    public Response update(String id, Item item) {
         logger.warn("PUT:: update/" + id);
         item.setId(id);
 
@@ -50,19 +47,17 @@ public class ItemServiceImpl implements ItemService {
             return Response.ok(updated).build();
 
         } catch (IllegalArgumentException e) {
-            return Response.notModified(e.getMessage()).build();
+            throw new NotFoundException(e.getMessage(), e);
         }
     }
 
     @Override
-    @POST
-    @Path("/")
     public Response add(Item item) {
         logger.warn("POST:: add/" + item.getId());
 
         try {
             Item added = repository.add(item);
-            return Response.ok(added).build();
+            return Response.created(URI.create(added.getId())).build();
 
         } catch (IllegalArgumentException e) {
             return Response.notModified(e.getMessage()).build();
@@ -70,9 +65,7 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
-    @DELETE
-    @Path("/{id}")
-    public Response delete(@PathParam("id") String id) {
+    public Response delete(String id) {
         logger.warn("DELETE:: delete/" + id);
 
         try {
@@ -80,7 +73,7 @@ public class ItemServiceImpl implements ItemService {
             return Response.ok(item).build();
 
         } catch (IllegalArgumentException e) {
-            return Response.notModified(e.getMessage()).build();
+            throw new NotFoundException(e.getMessage(), e);
         }
     }
 }

@@ -16,7 +16,7 @@ import static org.junit.Assert.assertTrue
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
-public class ListCommandSpec extends BaseKarafSupport {
+public class ListCommandSpecification extends BaseKarafSupport {
 
     @Test
     public void list() {

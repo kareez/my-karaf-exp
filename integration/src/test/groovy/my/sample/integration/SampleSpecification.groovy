@@ -22,7 +22,7 @@ import static org.junit.Assert.assertTrue
 @Ignore
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
-public class SampleSpec extends BaseKarafSupport {
+public class SampleSpecification extends BaseKarafSupport {
 
     @Test
     public void listCommand() throws Exception {

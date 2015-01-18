@@ -5,6 +5,7 @@ import my.sample.rest.api.Item
 import spock.lang.Specification
 import spock.lang.Unroll
 
+import javax.ws.rs.NotFoundException
 import javax.ws.rs.core.Response
 
 /**
@@ -57,10 +58,11 @@ class ItemServiceImplSpec extends Specification {
     def "check failed update(id, item)"() {
         def item = new Item("unknown", "ok", "ok desc")
         when:
-        def r = service.update(item.id, item)
+        service.update(item.id, item)
 
         then:
-        r.status == Response.Status.NOT_MODIFIED.statusCode
+        def e = thrown(NotFoundException)
+        e.message == "Item not found. (item #unknown)"
     }
 
     def "check successful add(item)"() {
@@ -70,8 +72,8 @@ class ItemServiceImplSpec extends Specification {
         def r = service.add(item)
 
         then:
-        r.status == Response.Status.OK.statusCode
-        r.entity == item
+        r.status == Response.Status.CREATED.statusCode
+        r.headers.getFirst('Location').toString() == '33'
     }
 
     def "check failed add(item)"() {
@@ -95,9 +97,10 @@ class ItemServiceImplSpec extends Specification {
 
     def "check failed delete(id)"() {
         when:
-        def r = service.delete("invalid")
+        service.delete("invalid")
 
         then:
-        r.status == Response.Status.NOT_MODIFIED.statusCode
+        def e = thrown(NotFoundException)
+        e.message == "Item not found. (item #invalid)"
     }
 }

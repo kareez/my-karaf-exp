@@ -20,7 +20,7 @@ import static org.junit.Assert.*
 
 @RunWith(PaxExam.class)
 @ExamReactorStrategy(PerClass.class)
-public class RestSpec extends BaseKarafSupport {
+public class RestSpecification extends BaseKarafSupport {
     private WebClient client
 
     @Before
@@ -89,13 +89,11 @@ public class RestSpec extends BaseKarafSupport {
         Response response = client.accept(media).header(HttpHeaders.CONTENT_TYPE, media)
                 .post(generator("$id", "Item #$id", "Description for item #$id"))
 
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(media, response.getMediaType())
+        assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus())
 
-        String payload = response.readEntity(String.class)
-        assertNotNull(payload)
-
-        assertItem(payload, id)
+        def location = response.headers.getFirst("Location")
+        assertNotNull(location)
+        assertTrue(location.toString().endsWith("items/" + id))
     }
 
     @Test
@@ -114,7 +112,7 @@ public class RestSpec extends BaseKarafSupport {
                 .post(generator("$id", "Item #$id", "Description for item #$id"))
                 .getStatus()
 
-        assertEquals(Response.Status.OK.getStatusCode(), added)
+        assertEquals(Response.Status.CREATED.getStatusCode(), added)
 
         Response response = client.accept(media).header(HttpHeaders.CONTENT_TYPE, media)
                 .path("$id", [])
@@ -143,7 +141,7 @@ public class RestSpec extends BaseKarafSupport {
                 .post(generator("$id", "Item #$id", "Description for item #$id"))
                 .getStatus()
 
-        assertEquals(Response.Status.OK.getStatusCode(), added)
+        assertEquals(Response.Status.CREATED.getStatusCode(), added)
 
         Response response = client.accept(media).path("$id", []).delete()
 
