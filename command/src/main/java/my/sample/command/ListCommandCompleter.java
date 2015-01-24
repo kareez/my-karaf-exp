@@ -15,8 +15,7 @@ public class ListCommandCompleter implements Completer {
     public int complete(String buffer, int cursor, List candidates) {
         StringsCompleter delegate = new StringsCompleter();
 
-        Arrays.asList("one", "two", "three", "four", "five")
-                .forEach(delegate.getStrings()::add);
+        Arrays.asList("one", "two", "three", "four", "five").forEach(delegate.getStrings()::add);
 
         return delegate.complete(buffer, cursor, candidates);
     }

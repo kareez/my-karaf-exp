@@ -7,8 +7,8 @@ import my.sample.provider.SampleService;
  */
 public class DefaultSampleService implements SampleService {
 
+    @Override
     public String echo(String message) {
         return "Echo processed: " + message;
     }
-
 }

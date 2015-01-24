@@ -10,6 +10,7 @@ import org.apache.cxf.message.Exchange;
 public class SampleInvoker extends JAXRSInvoker {
     private SampleLogger logger;
 
+    @SuppressWarnings("UnusedDeclaration")
     public void setLogger(SampleLogger logger) {
         this.logger = logger;
     }

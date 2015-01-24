@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
@@ -15,10 +16,10 @@ class ItemRepository {
     Map<String, Item> items = new HashMap<>();
 
     ItemRepository() {
-        for (int i = 1; i < 4; i++) {
-            String id = String.valueOf(i);
-            items.put(id, new Item(id, "Item #" + id, "Description for item #" + id));
-        }
+        IntStream.range(1, 4)
+                .mapToObj(String::valueOf)
+                .map(id -> new Item(id, "Item #" + id, "Description for item #" + id))
+                .forEach(item -> items.put(item.getId(), item));
     }
 
     List<Item> get() {
