@@ -23,7 +23,7 @@
         <cxf.version>3.0.3</cxf.version>
         <!-- test artifacts -->
         <servicemix.version>4.10_1</servicemix.version>
-        <groovy.version>2.3.9</groovy.version>
+        <groovy.version>2.4.0</groovy.version>
         <spock.version>0.7-groovy-2.0</spock.version>
         <!-- plugins -->
         <compiler.plugin.version>3.2</compiler.plugin.version>

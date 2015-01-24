@@ -191,12 +191,12 @@ public class BaseKarafSupport {
             String flt
             if (filter != null) {
                 if (filter.startsWith("(")) {
-                    flt = "(&(" + Constants.OBJECTCLASS + "=" + type.getName() + ")" + filter + ")"
+                    flt = "(&(${Constants.OBJECTCLASS}=${type.getName()})$filter)"
                 } else {
-                    flt = "(&(" + Constants.OBJECTCLASS + "=" + type.getName() + ")(" + filter + "))"
+                    flt = "(&(${Constants.OBJECTCLASS}=${type.getName()})($filter))"
                 }
             } else {
-                flt = "(" + Constants.OBJECTCLASS + "=" + type.getName() + ")"
+                flt = "(${Constants.OBJECTCLASS}=${type.getName()})"
             }
             Filter osgiFilter = FrameworkUtil.createFilter(flt)
             ServiceTracker tracker = new ServiceTracker(bundleContext, osgiFilter, null)
@@ -206,17 +206,17 @@ public class BaseKarafSupport {
             Object svc = type.cast(tracker.waitForService(timeout))
             if (svc == null) {
                 Dictionary dic = bundleContext.getBundle().getHeaders()
-                System.err.println("Test bundle headers: " + explode(dic))
+                System.err.println("Test bundle headers: ${explode(dic)}")
 
                 for (ServiceReference ref : asCollection(bundleContext.getAllServiceReferences(null, null))) {
-                    System.err.println("ServiceReference: " + ref)
+                    System.err.println("ServiceReference: $ref")
                 }
 
                 for (ServiceReference ref : asCollection(bundleContext.getAllServiceReferences(null, flt))) {
-                    System.err.println("Filtered ServiceReference: " + ref)
+                    System.err.println("Filtered ServiceReference: $ref")
                 }
 
-                throw new RuntimeException("Gave up waiting for service " + flt)
+                throw new RuntimeException("Gave up waiting for service $flt")
             }
             return type.cast(svc)
         } catch (InvalidSyntaxException e) {
@@ -235,7 +235,7 @@ public class BaseKarafSupport {
         StringBuilder result = new StringBuilder()
         while (keys.hasMoreElements()) {
             Object key = keys.nextElement()
-            result.append(String.format("%s=%s", key, dictionary.get(key)))
+            result.append("$key=${dictionary.get(key)}")
             if (keys.hasMoreElements()) {
                 result.append(", ")
             }
