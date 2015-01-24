@@ -1,58 +1,54 @@
 package my.sample.factory.impl;
 
+import my.sample.activator.SampleLogger;
 import my.sample.factory.SampleFactoryService;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
 public class DefaultSampleFactoryService implements SampleFactoryService {
-    private String foo;
-    private String bar;
-    private String baz;
+    private SampleLogger logger;
+    private Map<String, Object> config;
 
     public DefaultSampleFactoryService() {
-        System.out.println("new DefaultSampleFactoryService: " + this);
+        this.config = new HashMap<>();
     }
 
     public void init() {
-        System.out.println("Initializing DefaultSampleFactoryService: " + this);
+        logger.info("Initializing DefaultSampleFactoryService: " + this);
     }
 
     public void update(Map<String, ?> config) {
-        System.out.println("updating....: " + this);
+        this.config.clear();
+        this.config.putAll(config);
+
+        logger.info("updating....: " + this);
     }
 
     public void destroy() {
-        System.out.println("Destroying DefaultSampleFactoryService: " + this);
+        logger.info("Destroying DefaultSampleFactoryService: " + this);
     }
 
     public String echo(String message) {
         return "Echo processed: " + message;
     }
 
-    public void setFoo(String foo) {
-        System.out.println("setting new foo:" + foo);
-        this.foo = foo;
-    }
-
-    public void setBar(String bar) {
-        System.out.println("setting new bar:" + bar);
-        this.bar = bar;
-    }
-
-    public void setBaz(String baz) {
-        System.out.println("setting new baz:" + baz);
-        this.baz = baz;
+    @SuppressWarnings("UnusedDeclaration")
+    public void setLogger(SampleLogger logger) {
+        this.logger = logger;
     }
 
     @Override
     public String toString() {
-        return " InternalBean {" +
-                " foo = '" + foo + '\'' +
-                ", bar = '" + bar + '\'' +
-                ", baz = '" + baz + '\'' +
-                " }";
+        StringBuilder builder = new StringBuilder("{");
+        for (String key : config.keySet()) {
+            builder.append("\n\t").append(key).append(": ").append(config.get(key));
+        }
+        builder.append("\n").append("}");
+
+        return builder.toString();
     }
 }
