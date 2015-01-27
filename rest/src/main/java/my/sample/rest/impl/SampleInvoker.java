@@ -1,13 +1,11 @@
 package my.sample.rest.impl;
 
 import my.sample.activator.SampleLogger;
-import org.apache.cxf.jaxrs.JAXRSInvoker;
-import org.apache.cxf.message.Exchange;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public class SampleInvoker extends JAXRSInvoker {
+public class SampleInvoker { //extends JAXRSInvoker {
     private SampleLogger logger;
 
     @SuppressWarnings("UnusedDeclaration")
@@ -15,9 +13,9 @@ public class SampleInvoker extends JAXRSInvoker {
         this.logger = logger;
     }
 
-    @Override
-    public Object invoke(Exchange exchange, Object request, Object resourceObject) {
-        logger.warn("Invoker...");
-        return super.invoke(exchange, request, resourceObject);
-    }
+//    @Override
+//    public Object invoke(Exchange exchange, Object request, Object resourceObject) {
+//        logger.warn("Invoker...");
+//        return super.invoke(exchange, request, resourceObject);
+//    }
 }
