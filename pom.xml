@@ -18,8 +18,8 @@
 
     <properties>
         <osgi.version>5.0.0</osgi.version>
-        <karaf.version>3.0.2</karaf.version>
-        <karaf.shell.version>3.0.2</karaf.shell.version>
+        <karaf.version>3.0.3</karaf.version>
+        <karaf.shell.version>3.0.3</karaf.shell.version>
         <cxf.version>3.0.3</cxf.version>
         <!-- test artifacts -->
         <servicemix.version>4.10_1</servicemix.version>
