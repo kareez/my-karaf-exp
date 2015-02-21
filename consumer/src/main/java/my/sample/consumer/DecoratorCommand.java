@@ -7,8 +7,8 @@ import org.apache.karaf.shell.api.action.Command;
 import org.apache.karaf.shell.api.action.lifecycle.Reference;
 import org.apache.karaf.shell.api.action.lifecycle.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
@@ -36,6 +36,10 @@ public class DecoratorCommand implements Action {
 
         String param = arg == null ? "<not given>" : arg;
 
-        return decorators.stream().map(decorator -> decorator.decorate(param)).collect(Collectors.toList());
+        List<String> result = new ArrayList<>(decorators.size());
+        for (SampleDecorator decorator : decorators) {
+            result.add(decorator.decorate(param));
+        }
+        return result;
     }
 }

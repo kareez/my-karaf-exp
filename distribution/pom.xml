@@ -48,6 +48,15 @@
         </dependency>
         <dependency>
             <!-- scope is runtime so the feature repo is listed in etc/org.apache.karaf.features.cfg file, and features will installed into the system directory -->
+            <groupId>org.apache.karaf.features</groupId>
+            <artifactId>enterprise</artifactId>
+            <classifier>features</classifier>
+            <version>${karaf.version}</version>
+            <type>xml</type>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <!-- scope is runtime so the feature repo is listed in etc/org.apache.karaf.features.cfg file, and features will installed into the system directory -->
             <groupId>org.apache.cxf.karaf</groupId>
             <artifactId>apache-cxf</artifactId>
             <classifier>features</classifier>
@@ -119,6 +128,11 @@
                         <feature>config</feature>
                         <feature>deployer</feature>
                         <feature>diagnostic</feature>
+                        <feature>jndi</feature>
+                        <feature>jdbc</feature>
+                        <feature>transaction</feature>
+                        <feature>jpa</feature>
+                        <feature>openjpa</feature>
                         <feature>feature</feature>
                         <feature>instance</feature>
                         <feature>kar</feature>
