@@ -15,15 +15,30 @@
     <jaxrs:server address="/items" id="itemService">
         <jaxrs:serviceBeans>
             <bean class="my.sample.rest.impl.ItemServiceImpl">
-                <property name="logger" ref="logService" />
+                <property name="logger" ref="logService"/>
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:invoker>
             <bean class="my.sample.rest.impl.SampleInvoker">
-                <property name="logger" ref="logService" />
+                <property name="logger" ref="logService"/>
             </bean>
         </jaxrs:invoker>
+        <jaxrs:features>
+            <bean class="org.apache.cxf.validation.BeanValidationFeature">
+                <property name="provider" ref="myProvider" />
+            </bean>
+        </jaxrs:features>
+        <jaxrs:providers>
+            <bean class="my.sample.rest.impl.MyExceptionMapper" />
+        </jaxrs:providers>
     </jaxrs:server>
 
+    <bean id="myProvider" class="org.apache.cxf.validation.BeanValidationProvider">
+        <argument type="javax.validation.ValidatorFactory" ref="validator-factory" />
+    </bean>
+
+    <bean id="validator-factory" class="javax.validation.ValidatorFactory" factory-ref="validator-factory-builder" factory-method="build" />
+
+    <bean id="validator-factory-builder" class="my.sample.rest.impl.ValidatorFactoryBuilder" />
 </blueprint>
 

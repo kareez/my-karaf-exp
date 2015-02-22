@@ -1,5 +1,6 @@
 package my.sample.rest.api;
 
+import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -38,7 +39,7 @@ public interface ItemService {
      */
     @PUT
     @Path("/{id}")
-    Response update(@PathParam("id") String id, Item item);
+    Response update(@PathParam("id") String id, @Valid Item item);
 
     /**
      * To add new item.
@@ -48,7 +49,7 @@ public interface ItemService {
      */
     @POST
     @Path("/")
-    Response add(Item item);
+    Response add(@Valid Item item);
 
     /**
      * To delete a specific item.

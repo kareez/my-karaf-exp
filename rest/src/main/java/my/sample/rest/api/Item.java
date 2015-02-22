@@ -1,5 +1,8 @@
 package my.sample.rest.api;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -9,8 +12,14 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 @XmlType(propOrder = {"id", "name", "desc"})
 public class Item {
+    @NotNull
     String id;
+
+    @Max(5)
+    @Min(2)
     String name;
+    
+    @Max(10)
     String desc;
 
     public Item() {
