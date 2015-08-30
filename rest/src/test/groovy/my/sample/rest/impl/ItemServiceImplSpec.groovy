@@ -46,7 +46,9 @@ class ItemServiceImplSpec extends Specification {
     }
 
     def "check successful update(id, item)"() {
+        given:
         def item = new Item("1", "ok", "ok desc")
+
         when:
         def r = service.update(item.id, item)
 
@@ -56,7 +58,9 @@ class ItemServiceImplSpec extends Specification {
     }
 
     def "check failed update(id, item)"() {
+        given:
         def item = new Item("unknown", "ok", "ok desc")
+
         when:
         service.update(item.id, item)
 
@@ -66,6 +70,7 @@ class ItemServiceImplSpec extends Specification {
     }
 
     def "check successful add(item)"() {
+        given:
         def item = new Item("33", "ok", "ok desc")
 
         when:
@@ -77,7 +82,9 @@ class ItemServiceImplSpec extends Specification {
     }
 
     def "check failed add(item)"() {
+        given:
         def item = new Item("1", "ok", "ok desc")
+
         when:
         def r = service.add(item)
 
@@ -91,8 +98,9 @@ class ItemServiceImplSpec extends Specification {
 
         then:
         r.status == Response.Status.OK.statusCode
-        r.entity.id == "1"
-        r.entity.name == "Item #1"
+        def item = r.entity as Item
+        item.id == "1"
+        item.name == "Item #1"
     }
 
     def "check failed delete(id)"() {
@@ -100,7 +108,7 @@ class ItemServiceImplSpec extends Specification {
         service.delete("invalid")
 
         then:
-        def e = thrown(NotFoundException)
+        def e = thrown NotFoundException
         e.message == "Item not found. (item #invalid)"
     }
 }

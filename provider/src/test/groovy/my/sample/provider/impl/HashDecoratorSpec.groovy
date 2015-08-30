@@ -10,13 +10,14 @@ class HashDecoratorSpec extends Specification {
 
     @Unroll
     def "test decoration for #message"() {
+        given:
         def decorator = new HashDecorator()
 
         when:
         def r = decorator.decorate(message)
 
         then:
-        r == "### $message ###"
+        r == "### $message ###".toString()
 
         where:
         message << ["one", "two", "a message"]
