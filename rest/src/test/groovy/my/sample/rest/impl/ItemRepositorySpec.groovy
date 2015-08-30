@@ -38,6 +38,7 @@ class ItemRepositorySpec extends Specification {
     }
 
     def "check update(item)"() {
+        given:
         def item = new Item("1", "ok", "ok desc")
         repo.update(item)
 
@@ -51,6 +52,7 @@ class ItemRepositorySpec extends Specification {
     }
 
     def "check add(item)"() {
+        given:
         def item = new Item("33", "ok", "ok desc")
         repo.add(item)
 
@@ -64,6 +66,7 @@ class ItemRepositorySpec extends Specification {
     }
 
     def "check delete(item)"() {
+        given:
         repo.delete("1")
 
         when:

@@ -76,17 +76,17 @@
                             org.apache.karaf.shell.console,
                             *
                         </Import-Package>
+                        <Karaf-Commands>*</Karaf-Commands>
                         <Bundle-Activator>my.sample.activator.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
             <plugin>
-                <groupId>org.codehaus.gmaven</groupId>
-                <artifactId>gmaven-plugin</artifactId>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
                 <executions>
                     <execution>
                         <goals>
-                            <goal>compile</goal>
                             <goal>testCompile</goal>
                         </goals>
                     </execution>

@@ -9,10 +9,12 @@ import spock.lang.Unroll
 /**
  * Test cases for {@link EchoCommand}
  */
-class EchoCommandTest extends Specification {
+class EchoCommandSpec extends Specification {
 
+    @SuppressWarnings("GroovyAccessibility")
     @Unroll
     def "test command with #arg"() {
+        given:
         def command = new EchoCommand()
         command.setLogger(Mock(SampleLogger))
         def service = Mock(SampleService)
@@ -21,7 +23,7 @@ class EchoCommandTest extends Specification {
         command.arg = arg
 
         when:
-        def result = command.doExecute()
+        def result = command.execute()
 
         then:
         result == arg

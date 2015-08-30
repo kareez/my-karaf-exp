@@ -16,12 +16,14 @@ class ListCommandSpec extends Specification {
         command.setLogger(Mock(SampleLogger))
     }
 
+    @SuppressWarnings("GroovyAccessibility")
     @Unroll
     def "execute with parameter #arg"() {
+        given:
         command.arg = arg
 
         when:
-        def result = command.doExecute()
+        def result = command.execute() as List<String>
 
         then:
         result[1] == res

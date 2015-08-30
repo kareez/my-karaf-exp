@@ -1,6 +1,6 @@
 package my.sample.integration
 
-import org.apache.karaf.shell.commands.CommandException
+import org.apache.karaf.shell.support.CommandException
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.ops4j.pax.exam.junit.PaxExam

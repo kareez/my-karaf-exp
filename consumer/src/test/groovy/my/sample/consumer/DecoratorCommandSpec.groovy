@@ -9,8 +9,10 @@ import spock.lang.Unroll
  */
 class DecoratorCommandSpec extends Specification {
 
+    @SuppressWarnings("GroovyAccessibility")
     @Unroll
     def "test decorator command with #message"() {
+        given:
         def decorator1 = Mock(SampleDecorator)
         decorator1.decorate(message) >> "X $message X"
         def decorator2 = Mock(SampleDecorator)
@@ -21,10 +23,10 @@ class DecoratorCommandSpec extends Specification {
         command.arg = message
 
         when:
-        def r = command.doExecute()
+        def r = command.execute() as List<String>
 
         then:
-        r == ["X $message X", "Y $message Y"]
+        r == ["X $message X", "Y $message Y"] as List<String>
 
         where:
         message << ["one", "two", "a message"]

@@ -10,13 +10,14 @@ class StarDecoratorSpec extends Specification {
 
     @Unroll
     def "test decoration for #message"() {
+        given:
         def decorator = new StarDecorator()
 
         when:
         def r = decorator.decorate(message)
 
         then:
-        r == "*** $message ***"
+        r == "*** $message ***".toString()
 
         where:
         message << ["one", "two", "a message"]

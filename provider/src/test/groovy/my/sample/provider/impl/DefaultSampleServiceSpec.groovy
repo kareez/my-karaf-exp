@@ -10,13 +10,14 @@ class DefaultSampleServiceSpec extends Specification {
 
     @Unroll
     def "test echo #message"() {
+        given:
         def service = new DefaultSampleService()
 
         when:
         def r = service.echo(message)
 
         then:
-        r == "Echo processed: " + message
+        r == "Echo processed: $message".toString()
 
         where:
         message << ["one", "two", "three"]

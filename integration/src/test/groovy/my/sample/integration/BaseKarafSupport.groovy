@@ -1,9 +1,9 @@
 package my.sample.integration
 
-import org.apache.felix.service.command.CommandProcessor
-import org.apache.felix.service.command.CommandSession
 import org.apache.karaf.features.BootFinished
 import org.apache.karaf.features.FeaturesService
+import org.apache.karaf.shell.api.console.Session
+import org.apache.karaf.shell.api.console.SessionFactory
 import org.junit.Assert
 import org.ops4j.pax.exam.Configuration
 import org.ops4j.pax.exam.Option
@@ -14,9 +14,6 @@ import org.osgi.framework.*
 import org.osgi.util.tracker.ServiceTracker
 
 import javax.inject.Inject
-import javax.management.remote.JMXConnector
-import javax.management.remote.JMXConnectorFactory
-import javax.management.remote.JMXServiceURL
 import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 import java.util.concurrent.FutureTask
@@ -77,9 +74,8 @@ public class BaseKarafSupport {
                 .versionAsInProject()
 
         return [
-                //debugConfiguration("5005", true),
+//                debugConfiguration("5005", true),
                 distribution,
-                configureSecurity().enableKarafMBeanServerBuilder(),
                 keepRuntimeFolder(),
                 provision(groovy),
                 logLevel(LogLevelOption.LogLevel.ERROR)
@@ -106,8 +102,8 @@ public class BaseKarafSupport {
      * @return execution result
      */
     protected Object executeCommand(final String command, final Long timeout, final Boolean silent) {
-        final CommandProcessor commandProcessor = getOsgiService(CommandProcessor.class)
-        final CommandSession commandSession = commandProcessor.createSession(System.in, System.out, System.err)
+        final SessionFactory commandProcessor = getOsgiService(SessionFactory.class)
+        final Session commandSession = commandProcessor.create(System.in, System.out, System.err)
         FutureTask<Object> commandFuture = new FutureTask<>({
             try {
                 if (!silent) {
@@ -150,8 +146,8 @@ public class BaseKarafSupport {
         String response
         final ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream()
         final PrintStream printStream = new PrintStream(byteArrayOutputStream)
-        final CommandProcessor commandProcessor = getOsgiService(CommandProcessor.class)
-        final CommandSession commandSession = commandProcessor.createSession(System.in, printStream, System.err)
+        final SessionFactory commandProcessor = getOsgiService(SessionFactory.class)
+        final Session commandSession = commandProcessor.create(System.in, printStream, System.err)
         FutureTask<String> commandFuture = new FutureTask<>({
             try {
                 if (!silent) {
@@ -249,14 +245,6 @@ public class BaseKarafSupport {
     @SuppressWarnings("GrMethodMayBeStatic")
     private Collection<ServiceReference> asCollection(ServiceReference[] references) {
         return references != null ? Arrays.asList(references) : Collections.<ServiceReference> emptyList()
-    }
-
-    @SuppressWarnings("GrMethodMayBeStatic")
-    protected JMXConnector getJMXConnector() throws Exception {
-        return JMXConnectorFactory.connect(new JMXServiceURL(
-                "service:jmx:rmi:///jndi/rmi://localhost:1099/karaf-root"),
-                ["jmx.remote.credentials": ["karaf", "karaf"]]
-        )
     }
 
     @SuppressWarnings("GroovyUnusedDeclaration")

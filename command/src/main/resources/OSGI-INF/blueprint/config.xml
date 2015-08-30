@@ -1,18 +1,2 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0">
-
-    <bean id="sampleCompleter" class="my.sample.command.ListCommandCompleter"/>
-
-    <reference id="logService" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
-
-    <command-bundle xmlns="http://karaf.apache.org/xmlns/shell/v1.1.0">
-        <command>
-            <action class="my.sample.command.ListCommand">
-                <property name="logger" ref="logService"/>
-            </action>
-            <completers>
-                <ref component-id="sampleCompleter"/>
-            </completers>
-        </command>
-    </command-bundle>
-</blueprint>
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" />
