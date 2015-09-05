@@ -16,7 +16,7 @@ class ItemRepository {
         this.entityManager = entityManager;
     }
 
-    ItemRepository() {
+    public void init() {
         for (int i = 1; i < 4; i++) {
             String id = String.valueOf(i);
             entityManager.persist(new Item(id, "Item #" + id, "Description for item #" + id));
@@ -54,7 +54,7 @@ class ItemRepository {
     Item delete(String id) {
         Item item = entityManager.find(Item.class, id);
         if (item != null) {
-            entityManager.remove(id);
+            entityManager.remove(item);
             return item;
         }
         throw new IllegalArgumentException("Item not found. (item #" + id + ")");

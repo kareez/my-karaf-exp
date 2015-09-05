@@ -132,7 +132,6 @@
                         <feature>jdbc</feature>
                         <feature>transaction</feature>
                         <feature>jpa</feature>
-                        <feature>openjpa</feature>
                         <feature>feature</feature>
                         <feature>instance</feature>
                         <feature>kar</feature>

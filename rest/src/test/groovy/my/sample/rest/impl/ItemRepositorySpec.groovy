@@ -1,7 +1,6 @@
 package my.sample.rest.impl
 
 import my.sample.rest.api.Item
-import spock.lang.Specification
 import spock.lang.Unroll
 
 /**
@@ -9,8 +8,15 @@ import spock.lang.Unroll
  */
 
 @Unroll
-class ItemRepositorySpec extends Specification {
-    def repo = new ItemRepository()
+class ItemRepositorySpec extends RepoAware {
+
+    def setup() {
+        internalSetup()
+    }
+
+    def cleanup() {
+        internalCleanup()
+    }
 
     def "check get()"() {
         when:

@@ -2,7 +2,6 @@ package my.sample.rest.impl
 
 import my.sample.activator.SampleLogger
 import my.sample.rest.api.Item
-import spock.lang.Specification
 import spock.lang.Unroll
 
 import javax.ws.rs.NotFoundException
@@ -11,12 +10,20 @@ import javax.ws.rs.core.Response
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-class ItemServiceImplSpec extends Specification {
+class ItemServiceImplSpec extends RepoAware {
 
-    def service = new ItemServiceImpl()
+    ItemServiceImpl service
 
     def setup() {
+        internalSetup()
+
+        service = new ItemServiceImpl()
         service.setLogger(Mock(SampleLogger))
+        service.setRepository(repo)
+    }
+
+    def cleanup() {
+        internalCleanup()
     }
 
     def "check findAll"() {
@@ -54,7 +61,10 @@ class ItemServiceImplSpec extends Specification {
 
         then:
         r.status == Response.Status.OK.statusCode
-        r.entity == item
+        def update = r.entity as Item
+        update.id == item.id
+        update.name == item.name
+        update.desc == item.desc
     }
 
     def "check failed update(id, item)"() {
