@@ -30,16 +30,69 @@ public class RestSpecification extends BaseKarafSupport {
 
     @Test
     public void findJson() {
-        find(MediaType.APPLICATION_JSON_TYPE)
+        def id = add(MediaType.APPLICATION_JSON_TYPE, JSON_GENERATOR)
+        find(id, MediaType.APPLICATION_JSON_TYPE)
     }
 
     @Test
     public void findXml() {
-        find(MediaType.APPLICATION_XML_TYPE)
+        def id = add(MediaType.APPLICATION_XML_TYPE, XML_GENERATOR)
+        find(id, MediaType.APPLICATION_XML_TYPE)
     }
 
-    private void find(MediaType media) {
-        Response response = client.accept(media).path('1', []).get()
+    @Test
+    public void findAllJson() {
+        def ids = (1..3).collect { add(MediaType.APPLICATION_JSON_TYPE, JSON_GENERATOR) }
+
+        findAll(ids, MediaType.APPLICATION_JSON_TYPE)
+    }
+
+    @Test
+    public void findAllXml() {
+        def ids = (1..3).collect { add(MediaType.APPLICATION_XML_TYPE, XML_GENERATOR) }
+
+        findAll(ids, MediaType.APPLICATION_XML_TYPE)
+    }
+
+    @Test
+    public void updateJson() {
+        def id = add(MediaType.APPLICATION_JSON_TYPE, JSON_GENERATOR)
+        update(id, MediaType.APPLICATION_JSON_TYPE, JSON_GENERATOR)
+    }
+
+    @Test
+    public void updateXml() {
+        def id = add(MediaType.APPLICATION_XML_TYPE, XML_GENERATOR)
+        update(id, MediaType.APPLICATION_XML_TYPE, XML_GENERATOR)
+    }
+
+    @Test
+    public void deleteJson() {
+        def id = add(MediaType.APPLICATION_JSON_TYPE, JSON_GENERATOR)
+        delete(id, MediaType.APPLICATION_JSON_TYPE)
+    }
+
+    @Test
+    public void deleteXml() {
+        def id = add(MediaType.APPLICATION_XML_TYPE, XML_GENERATOR)
+        delete(id, MediaType.APPLICATION_XML_TYPE)
+    }
+
+    private void delete(String id, MediaType media) {
+        Response response = client.accept(media).path("$id", []).delete()
+
+        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
+        assertEquals(media, response.getMediaType())
+    }
+
+    private static void assertItem(String payload, String id) {
+        assertTrue(payload.contains(id))
+        assertTrue(payload.contains("Item #$id"))
+        assertTrue(payload.contains("Description for item #$id"))
+    }
+
+    private void find(String id, MediaType media) {
+        Response response = client.accept(media).path(id, []).get()
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
         assertEquals(media, response.getMediaType())
@@ -47,20 +100,10 @@ public class RestSpecification extends BaseKarafSupport {
         String payload = response.readEntity(String.class)
         assertNotNull(payload)
 
-        assertItem(payload, 1)
+        assertItem(payload, id)
     }
 
-    @Test
-    public void findAllJson() {
-        findAll(MediaType.APPLICATION_JSON_TYPE)
-    }
-
-    @Test
-    public void findAllXml() {
-        findAll(MediaType.APPLICATION_XML_TYPE)
-    }
-
-    private void findAll(MediaType media) {
+    private void findAll(List<String> ids, MediaType media) {
         Response response = client.accept(media).get()
 
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
@@ -69,22 +112,11 @@ public class RestSpecification extends BaseKarafSupport {
         String payload = response.readEntity(String.class)
         assertNotNull(payload)
 
-        assertItem(payload, 1)
-        assertItem(payload, 2)
-        assertItem(payload, 3)
+        ids.each { assertItem(payload, it) }
     }
 
-    @Test
-    public void addJson() {
-        add(4, MediaType.APPLICATION_JSON_TYPE, JSON_GENERATOR)
-    }
-
-    @Test
-    public void addXml() {
-        add(5, MediaType.APPLICATION_XML_TYPE, XML_GENERATOR)
-    }
-
-    private void add(int id, MediaType media, Closure generator) {
+    private String add(MediaType media, Closure generator) {
+        def id = UUID.randomUUID().toString()
 
         Response response = client.accept(media).header(HttpHeaders.CONTENT_TYPE, media)
                 .post(generator("$id", "Item #$id", "Description for item #$id"))
@@ -94,25 +126,10 @@ public class RestSpecification extends BaseKarafSupport {
         def location = response.headers.getFirst("Location")
         assertNotNull(location)
         assertTrue(location.toString().endsWith("items/" + id))
+        return id
     }
 
-    @Test
-    public void updateJson() {
-        update(6, MediaType.APPLICATION_JSON_TYPE, JSON_GENERATOR)
-    }
-
-    @Test
-    public void updateXml() {
-        update(7, MediaType.APPLICATION_XML_TYPE, XML_GENERATOR)
-    }
-
-    private void update(int id, MediaType media, Closure generator) {
-
-        int added = client.accept(media).header(HttpHeaders.CONTENT_TYPE, media)
-                .post(generator("$id", "Item #$id", "Description for item #$id"))
-                .getStatus()
-
-        assertEquals(Response.Status.CREATED.getStatusCode(), added)
+    private void update(String id, MediaType media, Closure generator) {
 
         Response response = client.accept(media).header(HttpHeaders.CONTENT_TYPE, media)
                 .path("$id", [])
@@ -123,36 +140,6 @@ public class RestSpecification extends BaseKarafSupport {
 
         String payload = response.readEntity(String.class)
         assertNotNull(payload)
-    }
-
-    @Test
-    public void deleteJson() {
-        delete(8, MediaType.APPLICATION_JSON_TYPE, JSON_GENERATOR)
-    }
-
-    @Test
-    public void deleteXml() {
-        delete(9, MediaType.APPLICATION_XML_TYPE, XML_GENERATOR)
-    }
-
-    private void delete(int id, MediaType media, Closure generator) {
-
-        int added = client.accept(media).header(HttpHeaders.CONTENT_TYPE, media)
-                .post(generator("$id", "Item #$id", "Description for item #$id"))
-                .getStatus()
-
-        assertEquals(Response.Status.CREATED.getStatusCode(), added)
-
-        Response response = client.accept(media).path("$id", []).delete()
-
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(media, response.getMediaType())
-    }
-
-    private static void assertItem(String payload, int id) {
-        assertTrue(payload.contains(String.valueOf(id)))
-        assertTrue(payload.contains("Item #" + id))
-        assertTrue(payload.contains("Description for item #" + id))
     }
 
     private static def JSON_GENERATOR = { id, name, desc ->

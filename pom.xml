@@ -51,6 +51,7 @@
         <module>consumer</module>
         <module>myfeature</module>
         <module>factory</module>
+        <module>model</module>
         <module>rest</module>
         <module>distribution</module>
         <module>integration</module>

@@ -1,5 +1,6 @@
 package my.sample.rest.impl
 
+import my.sample.model.api.Item
 import spock.lang.Specification
 
 import javax.persistence.EntityManager
@@ -19,9 +20,10 @@ abstract class RepoAware extends Specification {
         emf = Persistence.createEntityManagerFactory("test-unit")
         em = emf.createEntityManager()
         repo = new ItemRepository()
-        repo.setEntityManager(em)
+        repo.setEm(em)
         em.getTransaction().begin()
-        repo.init()
+
+        (1..3).each { repo.add(new Item("$it", "Item #$it", "Description for item #$it")) }
     }
 
     def internalCleanup() {

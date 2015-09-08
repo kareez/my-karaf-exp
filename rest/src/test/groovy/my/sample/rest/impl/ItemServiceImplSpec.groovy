@@ -1,7 +1,7 @@
 package my.sample.rest.impl
 
 import my.sample.activator.SampleLogger
-import my.sample.rest.api.Item
+import my.sample.model.api.Item
 import spock.lang.Unroll
 
 import javax.ws.rs.NotFoundException

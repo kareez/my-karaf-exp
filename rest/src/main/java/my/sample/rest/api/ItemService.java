@@ -1,5 +1,7 @@
 package my.sample.rest.api;
 
+import my.sample.model.api.Item;
+
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;

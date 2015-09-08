@@ -1,6 +1,6 @@
 package my.sample.rest.impl
 
-import my.sample.rest.api.Item
+import my.sample.model.api.Item
 import spock.lang.Unroll
 
 /**

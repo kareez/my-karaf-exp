@@ -1,4 +1,4 @@
-package my.sample.rest.api;
+package my.sample.model.api;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
