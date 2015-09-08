@@ -1,5 +1,7 @@
-package my.sample.rest.api;
+package my.sample.model.api;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
@@ -8,7 +10,9 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlRootElement
 @XmlType(propOrder = {"id", "name", "desc"})
+@Entity
 public class Item {
+    @Id
     String id;
     String name;
     String desc;

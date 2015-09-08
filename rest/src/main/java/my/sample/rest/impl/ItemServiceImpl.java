@@ -1,7 +1,7 @@
 package my.sample.rest.impl;
 
 import my.sample.activator.SampleLogger;
-import my.sample.rest.api.Item;
+import my.sample.model.api.Item;
 import my.sample.rest.api.ItemService;
 
 import javax.ws.rs.NotFoundException;
@@ -13,12 +13,15 @@ import java.util.List;
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
 public class ItemServiceImpl implements ItemService {
-    private ItemRepository repository = new ItemRepository();
-
+    private ItemRepository repository;
     private SampleLogger logger;
 
     public void setLogger(SampleLogger logger) {
         this.logger = logger;
+    }
+
+    public void setRepository(ItemRepository repository) {
+        this.repository = repository;
     }
 
     @Override

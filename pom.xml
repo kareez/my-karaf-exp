@@ -20,6 +20,10 @@
         <osgi.version>5.0.0</osgi.version>
         <karaf.version>4.0.1</karaf.version>
         <cxf.version>3.1.2</cxf.version>
+        <h2.version>1.4.188</h2.version>
+        <hibernate.version>5.0.1.Final</hibernate.version>
+        <hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
+
         <!-- test artifacts -->
         <servicemix.version>4.12_1</servicemix.version>
         <groovy.version>2.4.4</groovy.version>
@@ -47,6 +51,7 @@
         <module>consumer</module>
         <module>myfeature</module>
         <module>factory</module>
+        <module>model</module>
         <module>rest</module>
         <module>distribution</module>
         <module>integration</module>
@@ -109,8 +114,8 @@
                     <version>${compiler.plugin.version}</version>
                     <inherited>true</inherited>
                     <configuration>
-                        <source>1.8</source>
-                        <target>1.8</target>
+                        <source>1.7</source>
+                        <target>1.7</target>
                     </configuration>
                 </plugin>
                 <plugin>

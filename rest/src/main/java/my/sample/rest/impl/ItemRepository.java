@@ -1,57 +1,56 @@
 package my.sample.rest.impl;
 
-import my.sample.rest.api.Item;
+import my.sample.model.api.Item;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.IntStream;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
 
-class ItemRepository {
-    Map<String, Item> items = new HashMap<>();
+public class ItemRepository {
+    @PersistenceContext(unitName = "sampleDB")
+    private EntityManager em;
 
-    ItemRepository() {
-        IntStream.range(1, 4)
-                .mapToObj(String::valueOf)
-                .map(id -> new Item(id, "Item #" + id, "Description for item #" + id))
-                .forEach(item -> items.put(item.getId(), item));
+    public void setEm(EntityManager em) {
+        this.em = em;
     }
 
-    List<Item> get() {
-        return new ArrayList<>(items.values());
+    public List<Item> get() {
+        return em.createQuery("select i from Item as i", Item.class).getResultList();
     }
 
-    Item get(String id) {
-        if (items.containsKey(id)) {
-            return items.get(id);
+    public Item get(String id) {
+        Item item = em.find(Item.class, id);
+        if (item != null) {
+            return item;
         }
         throw new IllegalArgumentException("Item not found. (item #" + id + ")");
     }
 
-    Item update(Item item) {
-        if (items.containsKey(item.getId())) {
-            items.put(item.getId(), item);
-            return items.get(item.getId());
+    public Item update(Item item) {
+        Item i = em.find(Item.class, item.getId());
+        if (i != null) {
+            return em.merge(item);
         }
         throw new IllegalArgumentException("Item not found. (item #" + item.getId() + ")");
     }
 
-    Item add(Item item) {
-        if (items.containsKey(item.getId())) {
+    public Item add(Item item) {
+        if (em.find(Item.class, item.getId()) != null) {
             throw new IllegalArgumentException("Duplicate item id. (item #" + item.getId() + ")");
         }
-        items.put(item.getId(), item);
-        return items.get(item.getId());
+        em.persist(item);
+        return item;
     }
 
-    Item delete(String id) {
-        if (items.containsKey(id)) {
-            return items.remove(id);
+    public Item delete(String id) {
+        Item item = em.find(Item.class, id);
+        if (item != null) {
+            em.remove(item);
+            return item;
         }
         throw new IllegalArgumentException("Item not found. (item #" + id + ")");
     }
