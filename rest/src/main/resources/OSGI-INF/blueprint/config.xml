@@ -8,12 +8,13 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://www.osgi.org/xmlns/blueprint/v1.0.0 https://osgi.org/xmlns/blueprint/v1.0.0/blueprint.xsd">
 
-    <jpa:enable />
-    <tx:enable-annotations />
+    <jpa:enable/>
+    <tx:enable-annotations/>
 
-    <reference id="logService" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
+    <reference id="sampleLogger" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
+    <reference id="factoryService" interface="my.sample.factory.SampleFactoryService" availability="mandatory"/>
 
-    <bean id="repository" class="my.sample.rest.impl.ItemRepository" >
+    <bean id="repository" class="my.sample.rest.impl.ItemRepository">
         <tx:transaction method="*"/>
     </bean>
 
@@ -23,16 +24,20 @@
         </cxf:features>
     </cxf:bus>
 
-    <jaxrs:server address="/items" id="itemService">
+    <jaxrs:server address="/" id="restService">
         <jaxrs:serviceBeans>
             <bean class="my.sample.rest.impl.ItemServiceImpl">
-                <property name="logger" ref="logService"/>
+                <property name="logger" ref="sampleLogger"/>
                 <property name="repository" ref="repository"/>
+            </bean>
+            <bean class="my.sample.rest.impl.EchoServiceImpl">
+                <property name="logger" ref="sampleLogger"/>
+                <property name="factory" ref="factoryService"/>
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:invoker>
             <bean class="my.sample.rest.impl.SampleInvoker">
-                <property name="logger" ref="logService"/>
+                <property name="logger" ref="sampleLogger"/>
             </bean>
         </jaxrs:invoker>
     </jaxrs:server>

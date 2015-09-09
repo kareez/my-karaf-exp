@@ -1,6 +1,7 @@
 package my.sample.integration
 
 import org.apache.cxf.jaxrs.client.WebClient
+import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -18,14 +19,19 @@ import static org.junit.Assert.*
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
 
-@RunWith(PaxExam.class)
-@ExamReactorStrategy(PerClass.class)
+@RunWith(PaxExam)
+@ExamReactorStrategy(PerClass)
 public class RestSpecification extends BaseKarafSupport {
     private WebClient client
 
     @Before
-    public void before() {
+    public void setup() {
         client = WebClient.create("http://localhost:8181/cxf/items")
+    }
+
+    @After
+    public void cleanup() {
+        client.reset()
     }
 
     @Test
@@ -79,10 +85,13 @@ public class RestSpecification extends BaseKarafSupport {
     }
 
     private void delete(String id, MediaType media) {
-        Response response = client.accept(media).path("$id", []).delete()
+        Response response = client
+                .accept(media)
+                .path("/$id", [])
+                .delete()
 
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(media, response.getMediaType())
+        assertEquals(Response.Status.OK.statusCode, response.status)
+        assertEquals(media, response.mediaType)
     }
 
     private static void assertItem(String payload, String id) {
@@ -92,24 +101,29 @@ public class RestSpecification extends BaseKarafSupport {
     }
 
     private void find(String id, MediaType media) {
-        Response response = client.accept(media).path(id, []).get()
+        Response response = client
+                .accept(media)
+                .path("/$id", [])
+                .get()
 
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(media, response.getMediaType())
+        assertEquals(Response.Status.OK.statusCode, response.status)
+        assertEquals(media, response.mediaType)
 
-        String payload = response.readEntity(String.class)
+        String payload = response.readEntity(String)
         assertNotNull(payload)
 
         assertItem(payload, id)
     }
 
     private void findAll(List<String> ids, MediaType media) {
-        Response response = client.accept(media).get()
+        Response response = client
+                .accept(media)
+                .get()
 
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(media, response.getMediaType())
+        assertEquals(Response.Status.OK.statusCode, response.status)
+        assertEquals(media, response.mediaType)
 
-        String payload = response.readEntity(String.class)
+        String payload = response.readEntity(String)
         assertNotNull(payload)
 
         ids.each { assertItem(payload, it) }
@@ -118,27 +132,31 @@ public class RestSpecification extends BaseKarafSupport {
     private String add(MediaType media, Closure generator) {
         def id = UUID.randomUUID().toString()
 
-        Response response = client.accept(media).header(HttpHeaders.CONTENT_TYPE, media)
+        Response response = client
+                .accept(media)
+                .header(HttpHeaders.CONTENT_TYPE, media)
                 .post(generator("$id", "Item #$id", "Description for item #$id"))
 
-        assertEquals(Response.Status.CREATED.getStatusCode(), response.getStatus())
+        assertEquals(Response.Status.CREATED.statusCode, response.status)
 
         def location = response.headers.getFirst("Location")
         assertNotNull(location)
-        assertTrue(location.toString().endsWith("items/" + id))
+        assertTrue(location.toString().endsWith("/$id"))
         return id
     }
 
     private void update(String id, MediaType media, Closure generator) {
 
-        Response response = client.accept(media).header(HttpHeaders.CONTENT_TYPE, media)
-                .path("$id", [])
+        Response response = client
+                .accept(media)
+                .header(HttpHeaders.CONTENT_TYPE, media)
+                .path("/$id", [])
                 .put(generator("$id", "Item #$id updaed", "Description for item #$id updated"))
 
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatus())
-        assertEquals(media, response.getMediaType())
+        assertEquals(Response.Status.OK.statusCode, response.status)
+        assertEquals(media, response.mediaType)
 
-        String payload = response.readEntity(String.class)
+        String payload = response.readEntity(String)
         assertNotNull(payload)
     }
 
