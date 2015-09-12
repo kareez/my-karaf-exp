@@ -10,6 +10,7 @@ import java.util.List;
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
+@Path("/items")
 @Produces({MediaType.APPLICATION_XML, MediaType.APPLICATION_JSON})
 public interface ItemService {
     /**

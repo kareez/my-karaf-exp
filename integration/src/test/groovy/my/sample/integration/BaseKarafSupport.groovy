@@ -78,7 +78,7 @@ public class BaseKarafSupport {
                 distribution,
                 keepRuntimeFolder(),
                 provision(groovy),
-                logLevel(LogLevelOption.LogLevel.ERROR)
+                logLevel(LogLevelOption.LogLevel.INFO)
         ] as Option[]
     }
 

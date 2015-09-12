@@ -7,9 +7,12 @@ public interface SampleService {
 
     /**
      * Concatenates a fixed string with the given message and return the result.
+     * NOTE: default implementation is just to check JDK8 support
      *
      * @param message given message
      * @return the concatenation of a fixed string and given message
      */
-    String echo(String message);
+    default String echo(String message) {
+        return message;
+    }
 }
