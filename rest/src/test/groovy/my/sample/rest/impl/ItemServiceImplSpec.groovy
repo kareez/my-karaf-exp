@@ -1,6 +1,6 @@
 package my.sample.rest.impl
 
-import my.sample.activator.SampleLogger
+import my.sample.activator.Logger
 import my.sample.model.api.Item
 import spock.lang.Unroll
 
@@ -18,7 +18,7 @@ class ItemServiceImplSpec extends RepoAware {
         internalSetup()
 
         service = new ItemServiceImpl()
-        service.setLogger(Mock(SampleLogger))
+        service.setLogger(Mock(Logger))
         service.setRepository(repo)
     }
 

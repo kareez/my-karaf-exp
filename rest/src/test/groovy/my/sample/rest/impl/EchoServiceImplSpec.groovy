@@ -1,7 +1,7 @@
 package my.sample.rest.impl
 
-import my.sample.activator.SampleLogger
-import my.sample.factory.SampleFactoryService
+import my.sample.activator.Logger
+import my.sample.factory.FactoryService
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
@@ -9,13 +9,13 @@ import my.sample.factory.SampleFactoryService
 class EchoServiceImplSpec extends RepoAware {
 
     EchoServiceImpl service
-    SampleFactoryService factory
+    FactoryService factory
 
     def setup() {
         service = new EchoServiceImpl()
 
-        service.logger = Mock(SampleLogger)
-        service.factory = factory = Mock(SampleFactoryService)
+        service.logger = Mock(Logger)
+        service.factory = factory = Mock(FactoryService)
     }
 
     def "check echo"() {

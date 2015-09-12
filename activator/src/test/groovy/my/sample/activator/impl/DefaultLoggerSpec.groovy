@@ -17,7 +17,7 @@ class DefaultLoggerSpec extends Specification {
         defaultLogger.logger = service
     }
 
-    def "call debug"() {
+    def "debug a message"() {
         when:
         defaultLogger.debug("message")
 
@@ -25,7 +25,7 @@ class DefaultLoggerSpec extends Specification {
         1 * service.log(LogService.LOG_DEBUG, "message")
     }
 
-    def "call info"() {
+    def "info a message"() {
         when:
         defaultLogger.info("message")
 
@@ -33,7 +33,7 @@ class DefaultLoggerSpec extends Specification {
         1 * service.log(LogService.LOG_INFO, "message")
     }
 
-    def "call warn"() {
+    def "warn a message"() {
         when:
         defaultLogger.warn("message")
 
@@ -41,7 +41,7 @@ class DefaultLoggerSpec extends Specification {
         1 * service.log(LogService.LOG_WARNING, "message")
     }
 
-    def "call error"() {
+    def "error a message"() {
         when:
         defaultLogger.error("message")
 

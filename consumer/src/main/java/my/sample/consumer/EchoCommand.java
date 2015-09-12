@@ -1,18 +1,17 @@
 package my.sample.consumer;
 
-import my.sample.activator.SampleLogger;
-import my.sample.provider.SampleService;
+import my.sample.activator.Logger;
+import my.sample.provider.Service;
 import org.apache.karaf.shell.api.action.Action;
 import org.apache.karaf.shell.api.action.Argument;
 import org.apache.karaf.shell.api.action.Command;
 import org.apache.karaf.shell.api.action.lifecycle.Reference;
-import org.apache.karaf.shell.api.action.lifecycle.Service;
 
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-@Service
+@org.apache.karaf.shell.api.action.lifecycle.Service
 @Command(scope = "my", name = "echo", description = "echo command")
 public class EchoCommand implements Action {
 
@@ -20,18 +19,10 @@ public class EchoCommand implements Action {
     private String arg = null;
 
     @Reference
-    private SampleService service;
+    private Service service;
 
     @Reference
-    private SampleLogger logger;
-
-    public void setService(SampleService service) {
-        this.service = service;
-    }
-
-    public void setLogger(SampleLogger logger) {
-        this.logger = logger;
-    }
+    private Logger logger;
 
     @Override
     public Object execute() throws Exception {

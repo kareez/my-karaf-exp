@@ -49,7 +49,7 @@
         <module>command</module>
         <module>provider</module>
         <module>consumer</module>
-        <module>myfeature</module>
+        <module>feature</module>
         <module>factory</module>
         <module>model</module>
         <module>rest</module>
@@ -123,6 +123,13 @@
                     <artifactId>maven-bundle-plugin</artifactId>
                     <version>${bundle.plugin.version}</version>
                     <extensions>true</extensions>
+                    <configuration>
+                        <instructions>
+                            <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                            <Bundle-Version>${project.version}</Bundle-Version>
+                            <Bundle-Activator>my.sample.activator.Activator</Bundle-Activator>
+                        </instructions>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
@@ -133,6 +140,13 @@
                     <groupId>org.codehaus.gmavenplus</groupId>
                     <artifactId>gmavenplus-plugin</artifactId>
                     <version>${gmavenplus.plugin.version}</version>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>testCompile</goal>
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>

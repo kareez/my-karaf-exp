@@ -1,7 +1,7 @@
 package my.sample.rest.impl;
 
-import my.sample.activator.SampleLogger;
-import my.sample.factory.SampleFactoryService;
+import my.sample.activator.Logger;
+import my.sample.factory.FactoryService;
 import my.sample.rest.api.EchoService;
 
 import javax.ws.rs.core.Response;
@@ -11,14 +11,14 @@ import java.util.Date;
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
 public class EchoServiceImpl implements EchoService {
-    private SampleFactoryService factory;
-    private SampleLogger logger;
+    private FactoryService factory;
+    private Logger logger;
 
-    public void setLogger(SampleLogger logger) {
+    public void setLogger(Logger logger) {
         this.logger = logger;
     }
 
-    public void setFactory(SampleFactoryService factory) {
+    public void setFactory(FactoryService factory) {
         this.factory = factory;
     }
 

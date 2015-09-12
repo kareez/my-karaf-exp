@@ -131,8 +131,8 @@
                         <feature>jdbc</feature>
                         <feature>transaction</feature>
                         <feature>jpa</feature>
-                        <feature>sample-data</feature>
-                        <feature>myfeature</feature>
+                        <feature>sample-dependencies</feature>
+                        <feature>sample-feature</feature>
                     </bootFeatures>
                     <installedFeatures/>
                     <archiveZip>false</archiveZip>

@@ -3,7 +3,7 @@ package my.sample.provider;
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public interface SampleDecorator {
+public interface Decorator {
     /**
      * Decorates the given message.
      * NOTE: default implementation is just to check JDK8 support

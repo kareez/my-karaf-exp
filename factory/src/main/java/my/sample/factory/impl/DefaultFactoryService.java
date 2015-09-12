@@ -1,7 +1,7 @@
 package my.sample.factory.impl;
 
-import my.sample.activator.SampleLogger;
-import my.sample.factory.SampleFactoryService;
+import my.sample.activator.Logger;
+import my.sample.factory.FactoryService;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,16 +9,16 @@ import java.util.Map;
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public class DefaultSampleFactoryService implements SampleFactoryService {
-    private SampleLogger logger;
+public class DefaultFactoryService implements FactoryService {
+    private Logger logger;
     private Map<String, Object> config;
 
-    public DefaultSampleFactoryService() {
+    public DefaultFactoryService() {
         this.config = new HashMap<>();
     }
 
     public void init() {
-        logger.info("Initializing DefaultSampleFactoryService: " + this);
+        logger.info("Initializing DefaultFactoryService: " + this);
     }
 
     public void update(Map<String, ?> config) {
@@ -29,7 +29,7 @@ public class DefaultSampleFactoryService implements SampleFactoryService {
     }
 
     public void destroy() {
-        logger.info("Destroying DefaultSampleFactoryService: " + this);
+        logger.info("Destroying DefaultFactoryService: " + this);
     }
 
     public String echo(String message) {
@@ -37,7 +37,7 @@ public class DefaultSampleFactoryService implements SampleFactoryService {
     }
 
     @SuppressWarnings("UnusedDeclaration")
-    public void setLogger(SampleLogger logger) {
+    public void setLogger(Logger logger) {
         this.logger = logger;
     }
 

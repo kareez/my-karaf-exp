@@ -3,12 +3,12 @@
            xmlns:cm="http://aries.apache.org/blueprint/xmlns/blueprint-cm/v1.1.0"
            default-activation="lazy">
 
-    <reference id="logService" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
-
-    <cm:managed-service-factory factory-pid="my.sample.factory" interface="my.sample.factory.SampleFactoryService">
-        <cm:managed-component class="my.sample.factory.impl.DefaultSampleFactoryService" init-method="init" destroy-method="destroy">
-            <cm:managed-properties persistent-id="" update-strategy="component-managed" update-method="update" />
-            <property name="logger" ref="logService" />
+    <cm:managed-service-factory factory-pid="my.sample.factory" interface="my.sample.factory.FactoryService">
+        <cm:managed-component class="my.sample.factory.impl.DefaultFactoryService" init-method="init" destroy-method="destroy">
+            <cm:managed-properties persistent-id="" update-strategy="component-managed" update-method="update"/>
+            <property name="logger">
+                <reference interface="my.sample.activator.Logger" availability="mandatory"/>
+            </property>
         </cm:managed-component>
     </cm:managed-service-factory>
 

@@ -1,14 +1,14 @@
 package my.sample.consumer;
 
-import my.sample.provider.SampleDecorator;
+import my.sample.provider.Decorator;
 import org.apache.karaf.shell.api.action.Action;
 import org.apache.karaf.shell.api.action.Argument;
 import org.apache.karaf.shell.api.action.Command;
 import org.apache.karaf.shell.api.action.lifecycle.Reference;
 import org.apache.karaf.shell.api.action.lifecycle.Service;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
@@ -20,12 +20,9 @@ public class DecoratorCommand implements Action {
     @Argument(index = 0, name = "arg", description = "message to decorate", required = false, multiValued = false)
     private String arg = null;
 
+    @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @Reference
-    private List<SampleDecorator> decorators;
-
-    public void setDecorators(List<SampleDecorator> decorators) {
-        this.decorators = decorators;
-    }
+    private List<Decorator> decorators;
 
     @Override
     public Object execute() throws Exception {
@@ -36,10 +33,6 @@ public class DecoratorCommand implements Action {
 
         String param = arg == null ? "<not given>" : arg;
 
-        List<String> result = new ArrayList<>(decorators.size());
-        for (SampleDecorator decorator : decorators) {
-            result.add(decorator.decorate(param));
-        }
-        return result;
+        return decorators.stream().map(decorator -> decorator.decorate(param)).collect(Collectors.toList());
     }
 }

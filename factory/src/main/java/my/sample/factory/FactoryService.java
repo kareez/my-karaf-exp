@@ -3,7 +3,7 @@ package my.sample.factory;
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public interface SampleFactoryService {
+public interface FactoryService {
 
     /**
      * Concatenates a fixed string with the given message and return the result.
