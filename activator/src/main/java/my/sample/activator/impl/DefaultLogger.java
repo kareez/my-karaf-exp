@@ -1,12 +1,12 @@
 package my.sample.activator.impl;
 
-import my.sample.activator.SampleLogger;
+import my.sample.activator.Logger;
 import org.osgi.service.log.LogService;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public class DefaultLogger implements SampleLogger {
+public class DefaultLogger implements Logger {
     private LogService logger;
 
     public void setLogger(LogService logger) {

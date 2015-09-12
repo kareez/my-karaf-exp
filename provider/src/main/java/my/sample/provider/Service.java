@@ -3,7 +3,7 @@ package my.sample.provider;
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public interface SampleService {
+public interface Service {
 
     /**
      * Concatenates a fixed string with the given message and return the result.

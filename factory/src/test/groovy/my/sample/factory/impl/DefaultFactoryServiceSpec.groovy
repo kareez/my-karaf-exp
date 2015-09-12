@@ -5,16 +5,16 @@ import spock.lang.Specification
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-class DefaultSampleFactoryServiceSpec extends Specification {
-    DefaultSampleFactoryService service
+class DefaultFactoryServiceSpec extends Specification {
+    DefaultFactoryService service
 
     def setup() {
-        service = new DefaultSampleFactoryService()
+        service = new DefaultFactoryService()
     }
 
     def "check echo implementation"() {
         when:
-        def result = new DefaultSampleFactoryService().echo("Me")
+        def result = new DefaultFactoryService().echo("Me")
 
         then:
         result == "Echo processed: Me"

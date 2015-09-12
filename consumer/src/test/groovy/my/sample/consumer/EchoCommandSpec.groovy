@@ -1,8 +1,8 @@
 
 package my.sample.consumer
 
-import my.sample.activator.SampleLogger
-import my.sample.provider.SampleService
+import my.sample.activator.Logger
+import my.sample.provider.Service
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -16,10 +16,10 @@ class EchoCommandSpec extends Specification {
     def "test command with #arg"() {
         given:
         def command = new EchoCommand()
-        command.setLogger(Mock(SampleLogger))
-        def service = Mock(SampleService)
+        command.logger = Mock(Logger)
+        def service = Mock(Service)
         service.echo(arg) >> arg
-        command.setService(service)
+        command.service = service
         command.arg = arg
 
         when:

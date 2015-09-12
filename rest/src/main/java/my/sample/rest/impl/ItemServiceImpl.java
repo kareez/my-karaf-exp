@@ -1,6 +1,6 @@
 package my.sample.rest.impl;
 
-import my.sample.activator.SampleLogger;
+import my.sample.activator.Logger;
 import my.sample.model.api.Item;
 import my.sample.rest.api.ItemService;
 
@@ -14,9 +14,9 @@ import java.util.List;
  */
 public class ItemServiceImpl implements ItemService {
     private ItemRepository repository;
-    private SampleLogger logger;
+    private Logger logger;
 
-    public void setLogger(SampleLogger logger) {
+    public void setLogger(Logger logger) {
         this.logger = logger;
     }
 

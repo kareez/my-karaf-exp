@@ -11,8 +11,8 @@
     <jpa:enable/>
     <tx:enable-annotations/>
 
-    <reference id="sampleLogger" interface="my.sample.activator.SampleLogger" availability="mandatory"/>
-    <reference id="factoryService" interface="my.sample.factory.SampleFactoryService" availability="mandatory"/>
+    <reference id="sampleLogger" interface="my.sample.activator.Logger" availability="mandatory"/>
+    <reference id="factoryService" interface="my.sample.factory.FactoryService" availability="mandatory"/>
 
     <bean id="repository" class="my.sample.rest.impl.ItemRepository">
         <tx:transaction method="*"/>
@@ -36,7 +36,7 @@
             </bean>
         </jaxrs:serviceBeans>
         <jaxrs:invoker>
-            <bean class="my.sample.rest.impl.SampleInvoker">
+            <bean class="my.sample.rest.impl.Invoker">
                 <property name="logger" ref="sampleLogger"/>
             </bean>
         </jaxrs:invoker>

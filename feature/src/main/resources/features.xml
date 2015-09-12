@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <features xmlns="http://karaf.apache.org/xmlns/features/v1.2.0" name="${project.artifactId}-${project.version}">
 
-    <feature name="sample-data" description="${project.name} - database" version="${project.version}">
+    <feature name="sample-dependencies" description="${project.name} - Dependencies" version="${project.version}">
         <!--hibernate-->
         <bundle>mvn:org.hibernate/hibernate-entitymanager/${hibernate.version}</bundle>
         <bundle>mvn:org.hibernate/hibernate-core/${hibernate.version}</bundle>
@@ -16,10 +16,7 @@
         <bundle>mvn:com.h2database/h2/${h2.version}</bundle>
     </feature>
 
-    <feature name="${project.artifactId}" description="${project.name}" version="${project.version}">
-
-        <details>${project.description}</details>
-
+    <feature name="sample-feature" description="My Sample :: Core" version="${project.version}">
         <bundle>mvn:my.sample/activator/${project.version}</bundle>
         <bundle>mvn:my.sample/command/${project.version}</bundle>
         <bundle>mvn:my.sample/provider/${project.version}</bundle>

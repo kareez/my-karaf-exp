@@ -1,6 +1,6 @@
 package my.sample.command
 
-import my.sample.activator.SampleLogger
+import my.sample.activator.Logger
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -11,9 +11,10 @@ class ListCommandSpec extends Specification {
 
     ListCommand command
 
+    @SuppressWarnings("GroovyAccessibility")
     def setup() {
         command = new ListCommand()
-        command.setLogger(Mock(SampleLogger))
+        command.logger = Mock(Logger)
     }
 
     @SuppressWarnings("GroovyAccessibility")

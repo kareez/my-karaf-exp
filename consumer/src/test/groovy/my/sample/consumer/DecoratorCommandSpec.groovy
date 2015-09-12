@@ -1,6 +1,6 @@
 package my.sample.consumer
 
-import my.sample.provider.SampleDecorator
+import my.sample.provider.Decorator
 import spock.lang.Specification
 import spock.lang.Unroll
 
@@ -13,13 +13,13 @@ class DecoratorCommandSpec extends Specification {
     @Unroll
     def "test decorator command with #message"() {
         given:
-        def decorator1 = Mock(SampleDecorator)
+        def decorator1 = Mock(Decorator)
         decorator1.decorate(message) >> "X $message X"
-        def decorator2 = Mock(SampleDecorator)
+        def decorator2 = Mock(Decorator)
         decorator2.decorate(message) >> "Y $message Y"
 
         def command = new DecoratorCommand();
-        command.setDecorators([decorator1, decorator2])
+        command.decorators = [decorator1, decorator2]
         command.arg = message
 
         when:

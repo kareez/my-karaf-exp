@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" default-activation="lazy">
 
-    <bean id="sampleService" class="my.sample.provider.impl.DefaultSampleService"/>
+    <bean id="sampleService" class="my.sample.provider.impl.DefaultService"/>
 
-    <service ref="sampleService" interface="my.sample.provider.SampleService"/>
+    <service ref="sampleService" interface="my.sample.provider.Service"/>
 
-    <service id="starDecorator" interface="my.sample.provider.SampleDecorator">
+    <service id="starDecorator" interface="my.sample.provider.Decorator">
         <bean class="my.sample.provider.impl.StarDecorator" />
     </service>
-    <service id="hashDecorator" interface="my.sample.provider.SampleDecorator">
+    <service id="hashDecorator" interface="my.sample.provider.Decorator">
         <bean class="my.sample.provider.impl.HashDecorator" />
     </service>
-    <service id="quoteDecorator" interface="my.sample.provider.SampleDecorator">
+    <service id="quoteDecorator" interface="my.sample.provider.Decorator">
         <bean class="my.sample.provider.impl.QuoteDecorator" />
     </service>
 

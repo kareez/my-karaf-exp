@@ -63,7 +63,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package>my.sample.command*;version=${project.version}</Export-Package>
                         <Import-Package>
                             !my.sample.command*,
@@ -73,20 +72,12 @@
                             *
                         </Import-Package>
                         <Karaf-Commands>*</Karaf-Commands>
-                        <Bundle-Activator>my.sample.activator.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
             <plugin>
                 <groupId>org.codehaus.gmavenplus</groupId>
                 <artifactId>gmavenplus-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>testCompile</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

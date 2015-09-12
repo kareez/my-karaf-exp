@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" default-activation="eager" >
+<blueprint xmlns="http://www.osgi.org/xmlns/blueprint/v1.0.0" default-activation="eager">
 
-    <reference id="logService" interface="org.osgi.service.log.LogService" availability="optional" />
-
-    <service interface="my.sample.activator.SampleLogger">
+    <service interface="my.sample.activator.Logger">
         <bean class="my.sample.activator.impl.DefaultLogger">
-            <property name="logger" ref="logService" />
+            <property name="logger">
+                <reference interface="org.osgi.service.log.LogService" availability="optional"/>
+            </property>
         </bean>
     </service>
-    
+
 </blueprint>

@@ -1,6 +1,6 @@
 package my.sample.command;
 
-import my.sample.activator.SampleLogger;
+import my.sample.activator.Logger;
 import org.apache.karaf.shell.api.action.Action;
 import org.apache.karaf.shell.api.action.Argument;
 import org.apache.karaf.shell.api.action.Command;
@@ -21,11 +21,7 @@ public class ListCommand implements Action {
     private String arg = null;
 
     @Reference
-    private SampleLogger logger;
-
-    public void setLogger(SampleLogger logger) {
-        this.logger = logger;
-    }
+    private Logger logger;
 
     @Override
     public Object execute() throws Exception {

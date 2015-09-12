@@ -6,12 +6,12 @@ import spock.lang.Unroll
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-class DefaultSampleServiceSpec extends Specification {
+class DefaultServiceSpec extends Specification {
 
     @Unroll
     def "test echo #message"() {
         given:
-        def service = new DefaultSampleService()
+        def service = new DefaultService()
 
         when:
         def r = service.echo(message)

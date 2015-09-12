@@ -1,17 +1,17 @@
 package my.sample.rest.impl;
 
-import my.sample.activator.SampleLogger;
+import my.sample.activator.Logger;
 import org.apache.cxf.jaxrs.JAXRSInvoker;
 import org.apache.cxf.message.Exchange;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public class SampleInvoker extends JAXRSInvoker {
-    private SampleLogger logger;
+public class Invoker extends JAXRSInvoker {
+    private Logger logger;
 
     @SuppressWarnings("UnusedDeclaration")
-    public void setLogger(SampleLogger logger) {
+    public void setLogger(Logger logger) {
         this.logger = logger;
     }
 

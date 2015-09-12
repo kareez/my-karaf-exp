@@ -16,27 +16,27 @@ class ActivatorSpec extends Specification {
     def bundle = Mock(Bundle)
 
     def setup() {
-        bundle.getSymbolicName() >> "bundle-symbolic-name"
-        bundle.getVersion() >> new Version("1.0.0")
+        bundle.symbolicName >> "bundle-symbolic-name"
+        bundle.version >> new Version("1.0.0")
 
         context.getServiceReference(_ as String) >> Mock(ServiceReference)
         context.getService(_ as ServiceReference) >> service
-        context.getBundle() >> bundle
+        context.bundle >> bundle
     }
 
-    def "Start a bundle"() {
+    def "start a bundle"() {
         when:
         new Activator().start(context)
 
         then:
-        1 * service.log(LogService.LOG_WARNING, "Starting Bundle: (bundle-symbolic-name: 1.0.0)")
+        1 * service.log(LogService.LOG_WARNING, "Starting Bundle: ($bundle.symbolicName: $bundle.version)")
     }
 
-    def "Stop a bundle"() {
+    def "stop a bundle"() {
         when:
         new Activator().stop(context)
 
         then:
-        1 * service.log(LogService.LOG_WARNING, "Stopping Bundle: (bundle-symbolic-name: 1.0.0)")
+        1 * service.log(LogService.LOG_WARNING, "Stopping Bundle: ($bundle.symbolicName: $bundle.version)")
     }
 }

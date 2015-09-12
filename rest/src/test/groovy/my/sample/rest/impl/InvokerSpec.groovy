@@ -5,7 +5,7 @@ import spock.lang.Specification
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-class SampleInvokerSpec extends Specification {
+class InvokerSpec extends Specification {
 
     def "todo"() {
         expect:

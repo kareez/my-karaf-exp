@@ -1,11 +1,11 @@
 package my.sample.provider.impl;
 
-import my.sample.provider.SampleDecorator;
+import my.sample.provider.Decorator;
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-public class QuoteDecorator implements SampleDecorator {
+public class QuoteDecorator implements Decorator {
     @Override
     public String decorate(String message) {
         return "\"\"\" " + message + " \"\"\"";
