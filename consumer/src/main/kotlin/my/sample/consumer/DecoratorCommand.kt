@@ -6,6 +6,7 @@ import org.apache.karaf.shell.api.action.Argument
 import org.apache.karaf.shell.api.action.Command
 import org.apache.karaf.shell.api.action.lifecycle.Reference
 import org.apache.karaf.shell.api.action.lifecycle.Service
+import java.util.*
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
@@ -23,6 +24,10 @@ public class DecoratorCommand : Action {
 
     @Throws(Exception::class)
     override fun execute(): Any {
-        return decorators.map { decorator -> decorator.decorate(arg ?: "<not given>") }.orEmpty()
+        val result = ArrayList<String>()
+        for (decorator in decorators) {
+            result.add(decorator.decorate(arg ?: "<not given>"))
+        }
+        return result
     }
 }
