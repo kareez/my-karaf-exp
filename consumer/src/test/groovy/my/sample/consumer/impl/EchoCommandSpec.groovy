@@ -1,5 +1,5 @@
 
-package my.sample.consumer
+package my.sample.consumer.impl
 
 import my.sample.activator.Logger
 import my.sample.provider.Service

@@ -72,7 +72,6 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Export-Package>my.sample.consumer*;version=${project.version}</Export-Package>
                         <Karaf-Commands>*</Karaf-Commands>
                     </instructions>
                 </configuration>

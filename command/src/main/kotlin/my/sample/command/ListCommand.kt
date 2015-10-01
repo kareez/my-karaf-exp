@@ -21,7 +21,7 @@ public class ListCommand : Action {
     private var arg: String? = null
 
     @Reference
-    private lateinit val logger: Logger
+    private lateinit var logger: Logger
 
     @Throws(Exception::class)
     override fun execute(): Any {

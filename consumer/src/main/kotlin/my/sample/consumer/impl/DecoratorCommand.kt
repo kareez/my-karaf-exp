@@ -1,4 +1,4 @@
-package my.sample.consumer
+package my.sample.consumer.impl
 
 import my.sample.provider.Decorator
 import org.apache.karaf.shell.api.action.Action
@@ -6,7 +6,8 @@ import org.apache.karaf.shell.api.action.Argument
 import org.apache.karaf.shell.api.action.Command
 import org.apache.karaf.shell.api.action.lifecycle.Reference
 import org.apache.karaf.shell.api.action.lifecycle.Service
-import java.util.*
+import java.util.ArrayList
+import java.util.List
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
@@ -20,7 +21,7 @@ public class DecoratorCommand : Action {
 
     @SuppressWarnings("MismatchedQueryAndUpdateOfCollection")
     @Reference
-    lateinit var decorators: java.util.List<Decorator>
+    lateinit var decorators: List<Decorator>
 
     @Throws(Exception::class)
     override fun execute(): Any {

@@ -1,4 +1,4 @@
-package my.sample.consumer
+package my.sample.consumer.impl
 
 import my.sample.activator.Logger
 import my.sample.provider.Service
@@ -19,10 +19,10 @@ public class EchoCommand : Action {
     private var arg: String? = null
 
     @Reference
-    private lateinit val service: Service
+    private lateinit var service: Service
 
     @Reference
-    private lateinit val logger: Logger
+    private lateinit var logger: Logger
 
     @Throws(Exception::class)
     override fun execute(): Any {

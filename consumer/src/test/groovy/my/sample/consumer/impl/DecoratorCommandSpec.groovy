@@ -1,4 +1,4 @@
-package my.sample.consumer
+package my.sample.consumer.impl
 
 import my.sample.provider.Decorator
 import spock.lang.Specification
