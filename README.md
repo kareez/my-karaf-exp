@@ -8,7 +8,7 @@ My Karaf Experience
 * Activator
  * A bundle activator which is used by other example bundles.
 * Command   
- * Few example of karaf command extensions.
+ * Few examples of karaf command extensions.
 * Provider  
  * An OSGi service provider.
 * Consumer  
