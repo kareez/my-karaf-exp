@@ -25,7 +25,7 @@ public class RestItemService : ItemService {
         try {
             return repository.get(id)
         } catch (e: IllegalArgumentException) {
-            throw NotFoundException(e.getMessage(), e)
+            throw NotFoundException(e.message, e)
         }
 
     }
@@ -39,7 +39,7 @@ public class RestItemService : ItemService {
             return Response.ok(updated).build()
 
         } catch (e: IllegalArgumentException) {
-            throw NotFoundException(e.getMessage(), e)
+            throw NotFoundException(e.message, e)
         }
 
     }
@@ -52,7 +52,7 @@ public class RestItemService : ItemService {
             return Response.created(URI.create(added.id)).build()
 
         } catch (e: IllegalArgumentException) {
-            return Response.notModified(e.getMessage()).build()
+            return Response.notModified(e.message).build()
         }
 
     }
@@ -65,7 +65,7 @@ public class RestItemService : ItemService {
             return Response.ok(item).build()
 
         } catch (e: IllegalArgumentException) {
-            throw NotFoundException(e.getMessage(), e)
+            throw NotFoundException(e.message, e)
         }
 
     }

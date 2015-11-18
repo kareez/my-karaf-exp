@@ -23,7 +23,7 @@
         <h2.version>1.4.188</h2.version>
         <hibernate.version>5.0.1.Final</hibernate.version>
         <hibernate.jpa.version>1.0.0.Final</hibernate.jpa.version>
-        <kotlin.version>0.14.449</kotlin.version>
+        <kotlin.version>1.0.0-beta-2423</kotlin.version>
 
         <!-- test artifacts -->
         <servicemix.version>4.12_1</servicemix.version>
@@ -89,7 +89,7 @@
             </dependency>
             <dependency>
                 <groupId>org.jetbrains.kotlin</groupId>
-                <artifactId>kotlin-stdlib</artifactId>
+                <artifactId>kotlin-osgi-bundle</artifactId>
                 <version>${kotlin.version}</version>
             </dependency>
             <!-- test artifacts -->

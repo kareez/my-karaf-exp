@@ -3,7 +3,7 @@
 
     <feature name="sample-dependencies" description="${project.name} - Dependencies" version="${project.version}">
         <!-- kotlin -->
-        <bundle>wrap:mvn:org.jetbrains.kotlin/kotlin-runtime/${kotlin.version}$Bundle-Name=Kotlin Runtime (Wrap)&amp;Bundle-SymbolicName=wrap-org.jetbrains.kotlin.kotlin-runtime&amp;Bundle-Version=${kotlin.version}&amp;Export-Package=kotlin,kotlin.io,kotlin.reflect,kotlin.jvm.internal</bundle>
+        <bundle>mvn:org.jetbrains.kotlin/kotlin-osgi-bundle/${kotlin.version}</bundle>
         <!--hibernate-->
         <bundle>mvn:org.hibernate/hibernate-entitymanager/${hibernate.version}</bundle>
         <bundle>mvn:org.hibernate/hibernate-core/${hibernate.version}</bundle>

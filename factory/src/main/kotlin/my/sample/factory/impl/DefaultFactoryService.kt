@@ -35,8 +35,8 @@ public class DefaultFactoryService : FactoryService {
 
     override fun toString(): String {
         val builder = StringBuilder("{")
-        for (key in config.keySet()) {
-            builder.append("\n\t").append(key).append(": ").append(config.get(key))
+        for (key in config.keys) {
+            builder.append("\n\t").append(key).append(": ").append(config[key])
         }
         builder.append("\n").append("}")
 
