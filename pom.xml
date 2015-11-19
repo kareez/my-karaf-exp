@@ -18,7 +18,7 @@
 
     <properties>
         <osgi.version>5.0.0</osgi.version>
-        <karaf.version>4.0.1</karaf.version>
+        <karaf.version>4.0.3</karaf.version>
         <cxf.version>3.1.2</cxf.version>
         <h2.version>1.4.188</h2.version>
         <hibernate.version>5.0.1.Final</hibernate.version>

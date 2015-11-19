@@ -5,11 +5,12 @@ import my.sample.rest.api.ItemRepository
 
 import javax.persistence.EntityManager
 import javax.persistence.PersistenceContext
+import javax.transaction.Transactional
 
 /**
  * @author mohammad shamsi <m.h.shams@gmail.com>
  */
-
+@Transactional
 public class JpaItemRepository : ItemRepository {
     @PersistenceContext(unitName = "sampleDB")
     lateinit var em: EntityManager

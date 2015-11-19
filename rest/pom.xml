@@ -22,6 +22,7 @@
 
     <properties>
         <ws.rs.api.version>2.0.1</ws.rs.api.version>
+        <javax.transaction-api.version>1.2</javax.transaction-api.version>
     </properties>
 
     <dependencies>
@@ -53,6 +54,11 @@
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.1-api</artifactId>
             <version>${hibernate.jpa.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.transaction</groupId>
+            <artifactId>javax.transaction-api</artifactId>
+            <version>${javax.transaction-api.version}</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>

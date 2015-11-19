@@ -14,9 +14,7 @@
     <reference id="sampleLogger" interface="my.sample.activator.Logger" availability="mandatory"/>
     <reference id="factoryService" interface="my.sample.factory.FactoryService" availability="mandatory"/>
 
-    <bean id="repository" class="my.sample.rest.impl.JpaItemRepository">
-        <tx:transaction method="*"/>
-    </bean>
+    <bean id="repository" class="my.sample.rest.impl.JpaItemRepository" />
 
     <cxf:bus>
         <cxf:features>
